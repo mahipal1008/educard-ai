@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 import {
   FileUp,
   X,
@@ -71,10 +72,17 @@ export default function ExamPredictorPage() {
 
   const handleFileAdd = (newFiles: FileList | null) => {
     if (!newFiles) return;
-    const valid = Array.from(newFiles).filter((f) => {
-      if (f.type !== "application/pdf") return false;
-      if (f.size > MAX_PDF_SIZE_MB * 1024 * 1024) return false;
-      return true;
+    const valid: File[] = [];
+    Array.from(newFiles).forEach((f) => {
+      if (f.type !== "application/pdf") {
+        toast.error(`"${f.name}" is not a PDF file.`);
+        return;
+      }
+      if (f.size > MAX_PDF_SIZE_MB * 1024 * 1024) {
+        toast.error(`"${f.name}" exceeds ${MAX_PDF_SIZE_MB}MB limit.`);
+        return;
+      }
+      valid.push(f);
     });
     setFiles((prev) => [...prev, ...valid].slice(0, 5));
   };
@@ -255,8 +263,17 @@ export default function ExamPredictorPage() {
               className="w-full h-11 gap-2"
               size="lg"
             >
-              <Sparkles className="h-4 w-4" />
-              Analyze Papers & Predict Questions
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Analyzing...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="h-4 w-4" />
+                  Analyze Papers & Predict Questions
+                </>
+              )}
             </Button>
           </CardContent>
         </Card>

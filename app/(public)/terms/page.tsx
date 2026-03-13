@@ -1,0 +1,391 @@
+// FILE: app/(public)/terms/page.tsx
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+
+export const metadata = {
+  title: "Terms of Service | EduCard AI",
+  description:
+    "Terms of Service for EduCard AI — read our terms covering account usage, content ownership, AI-generated content, API limits, refunds, and more.",
+};
+
+export default function TermsPage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1">
+        <div className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-24">
+          {/* Header */}
+          <div className="mb-12 space-y-3">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground">
+              Terms of Service
+            </h1>
+            <p className="text-muted-foreground">
+              Last updated: January 1, 2025
+            </p>
+          </div>
+
+          {/* Body */}
+          <div className="prose prose-neutral dark:prose-invert max-w-none space-y-10 text-muted-foreground">
+            {/* 1. Introduction */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                1. Introduction
+              </h2>
+              <p>
+                Welcome to EduCard AI. These Terms of Service (&ldquo;Terms&rdquo;) govern
+                your access to and use of the EduCard AI platform, including our
+                website, applications, APIs, and all related services
+                (collectively, the &ldquo;Service&rdquo;). By creating an account or using
+                the Service, you agree to be bound by these Terms. If you do not
+                agree, please do not use the Service.
+              </p>
+              <p>
+                EduCard AI is operated by EduCard AI (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or
+                &ldquo;our&rdquo;), a company incorporated in India.
+              </p>
+            </section>
+
+            {/* 2. Account Usage */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                2. Account Usage
+              </h2>
+              <p>
+                To access most features of the Service, you must register for an
+                account. When you register, you agree to:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  Provide accurate, current, and complete information during
+                  registration and keep your account information up to date.
+                </li>
+                <li>
+                  Maintain the security and confidentiality of your login
+                  credentials. You are responsible for all activity that occurs
+                  under your account.
+                </li>
+                <li>
+                  Not share, transfer, or sell your account to any other person
+                  or entity without our prior written consent.
+                </li>
+                <li>
+                  Not create multiple accounts for the purpose of abusing
+                  promotions, circumventing usage limits, or violating these
+                  Terms.
+                </li>
+                <li>
+                  Notify us immediately at{" "}
+                  <a
+                    href="mailto:hello@educardai.com"
+                    className="text-primary hover:underline"
+                  >
+                    hello@educardai.com
+                  </a>{" "}
+                  if you suspect any unauthorized use of your account.
+                </li>
+              </ul>
+              <p>
+                We reserve the right to suspend or terminate accounts that
+                violate these Terms, engage in fraudulent activity, or remain
+                inactive for an extended period, at our sole discretion.
+              </p>
+            </section>
+
+            {/* 3. Content Ownership */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                3. Content Ownership
+              </h2>
+              <p>
+                <strong className="text-foreground">Your Content.</strong> You
+                retain full ownership of any content you upload, submit, or
+                provide to the Service (&ldquo;User Content&rdquo;), including but not
+                limited to PDFs, documents, text, and links. By using the
+                Service, you grant us a limited, non-exclusive, worldwide,
+                royalty-free license to process and transform your User Content
+                solely for the purpose of providing the Service to you.
+              </p>
+              <p>
+                <strong className="text-foreground">Generated Content.</strong>{" "}
+                Flashcards, quizzes, summaries, and other materials generated by
+                the Service based on your User Content (&ldquo;Generated Content&rdquo;) are
+                provided to you for your personal or internal use. You may use,
+                modify, and share Generated Content freely, subject to any
+                applicable third-party rights in the underlying User Content.
+              </p>
+              <p>
+                <strong className="text-foreground">Our Content.</strong> All
+                intellectual property rights in the Service itself — including
+                its design, branding, software, algorithms, and documentation —
+                remain the exclusive property of EduCard AI and its licensors.
+              </p>
+            </section>
+
+            {/* 4. AI-Generated Content Disclaimer */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                4. AI-Generated Content Disclaimer
+              </h2>
+              <p>
+                The Service uses artificial intelligence and large language
+                models to generate flashcards, quizzes, summaries, and other
+                educational materials. While we strive for accuracy, you
+                acknowledge and agree that:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  AI-generated content may contain errors, inaccuracies,
+                  omissions, or outdated information. It is provided on an
+                  &ldquo;as-is&rdquo; basis and should not be treated as a substitute for
+                  professional advice, verified academic sources, or
+                  expert-reviewed material.
+                </li>
+                <li>
+                  You are solely responsible for reviewing and verifying
+                  AI-generated content before relying on it for academic,
+                  professional, or any other purpose.
+                </li>
+                <li>
+                  EduCard AI does not guarantee the completeness, reliability, or
+                  suitability of any AI-generated content for a particular
+                  purpose.
+                </li>
+                <li>
+                  We are not liable for any decisions made, actions taken, or
+                  consequences arising from your use of AI-generated content.
+                </li>
+              </ul>
+            </section>
+
+            {/* 5. API Usage Limits */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                5. API Usage &amp; Rate Limits
+              </h2>
+              <p>
+                Access to the Service, including any public or internal APIs, is
+                subject to usage limits that vary by subscription plan. You agree
+                to:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  Abide by the rate limits, generation quotas, and storage
+                  limits associated with your current plan as described on our
+                  Pricing page.
+                </li>
+                <li>
+                  Not attempt to circumvent, bypass, or exceed your usage limits
+                  through automated scripts, bots, or any other means.
+                </li>
+                <li>
+                  Not use the Service for scraping, data mining, or any
+                  large-scale automated data extraction without our explicit
+                  prior written consent.
+                </li>
+                <li>
+                  Not reverse-engineer, decompile, or attempt to extract the
+                  source code or underlying algorithms of the Service or its
+                  APIs.
+                </li>
+              </ul>
+              <p>
+                We may throttle, suspend, or restrict access to accounts that
+                exceed their allotted limits or engage in abusive behavior. We
+                reserve the right to modify usage limits at any time with
+                reasonable notice to affected users.
+              </p>
+            </section>
+
+            {/* 6. Payment & Refund Policy */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                6. Payment &amp; Refund Policy
+              </h2>
+              <p>
+                Certain features of the Service require a paid subscription.
+                When you subscribe to a paid plan, you agree to the following:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  All fees are charged in advance on a recurring basis
+                  (monthly or annually) according to the plan you select.
+                </li>
+                <li>
+                  Subscriptions renew automatically at the end of each billing
+                  cycle unless you cancel before the renewal date.
+                </li>
+                <li>
+                  You may cancel your subscription at any time. Upon
+                  cancellation, you will retain access to paid features until the
+                  end of your current billing period.
+                </li>
+                <li>
+                  Refunds are available within 7 days of the initial purchase or
+                  renewal, provided you have not substantially used the Service
+                  during that period. To request a refund, contact us at{" "}
+                  <a
+                    href="mailto:hello@educardai.com"
+                    className="text-primary hover:underline"
+                  >
+                    hello@educardai.com
+                  </a>
+                  .
+                </li>
+                <li>
+                  We reserve the right to change our pricing at any time.
+                  Existing subscribers will be notified at least 30 days before
+                  any price change takes effect on their account.
+                </li>
+              </ul>
+            </section>
+
+            {/* 7. Prohibited Conduct */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                7. Prohibited Conduct
+              </h2>
+              <p>You agree not to use the Service to:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  Upload, transmit, or process any content that is unlawful,
+                  harmful, threatening, defamatory, obscene, or otherwise
+                  objectionable.
+                </li>
+                <li>
+                  Infringe upon or violate the intellectual property rights,
+                  privacy rights, or other rights of any third party.
+                </li>
+                <li>
+                  Distribute malware, viruses, or any other harmful software
+                  through the Service.
+                </li>
+                <li>
+                  Interfere with or disrupt the integrity, performance, or
+                  availability of the Service or its underlying infrastructure.
+                </li>
+                <li>
+                  Use the Service for any purpose that is illegal under
+                  applicable law.
+                </li>
+              </ul>
+            </section>
+
+            {/* 8. Limitation of Liability */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                8. Limitation of Liability
+              </h2>
+              <p>
+                To the maximum extent permitted by applicable law, EduCard AI
+                and its directors, employees, partners, and affiliates shall not
+                be liable for any indirect, incidental, special, consequential,
+                or punitive damages, including but not limited to loss of
+                profits, data, goodwill, or other intangible losses, arising out
+                of or in connection with your use of the Service.
+              </p>
+              <p>
+                Our total cumulative liability to you for any and all claims
+                arising from or related to the Service shall not exceed the
+                amount you have paid to us in the twelve (12) months immediately
+                preceding the event giving rise to the claim.
+              </p>
+            </section>
+
+            {/* 9. Termination */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                9. Termination
+              </h2>
+              <p>
+                We may suspend or terminate your access to the Service at any
+                time, with or without cause, and with or without notice. Upon
+                termination, your right to use the Service ceases immediately.
+                Provisions of these Terms that by their nature should survive
+                termination shall remain in effect, including but not limited to
+                ownership provisions, warranty disclaimers, and limitations of
+                liability.
+              </p>
+              <p>
+                You may delete your account at any time through your account
+                settings. Upon deletion, we will remove your personal data in
+                accordance with our Privacy Policy, except where retention is
+                required by law.
+              </p>
+            </section>
+
+            {/* 10. Changes to These Terms */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                10. Changes to These Terms
+              </h2>
+              <p>
+                We may update these Terms from time to time to reflect changes
+                in our Service, legal requirements, or business practices. When
+                we make material changes, we will notify you by email or through
+                a prominent notice on the Service. Your continued use of the
+                Service after the effective date of any changes constitutes your
+                acceptance of the revised Terms.
+              </p>
+            </section>
+
+            {/* 11. Governing Law */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                11. Governing Law &amp; Dispute Resolution
+              </h2>
+              <p>
+                These Terms shall be governed by and construed in accordance
+                with the laws of India, without regard to its conflict of law
+                principles. Any disputes arising out of or in connection with
+                these Terms or the Service shall be subject to the exclusive
+                jurisdiction of the courts located in India.
+              </p>
+              <p>
+                Before initiating any formal legal proceedings, you agree to
+                first attempt to resolve any dispute informally by contacting us
+                at{" "}
+                <a
+                  href="mailto:hello@educardai.com"
+                  className="text-primary hover:underline"
+                >
+                  hello@educardai.com
+                </a>
+                . We will make a good-faith effort to resolve the matter within
+                30 days.
+              </p>
+            </section>
+
+            {/* 12. Contact */}
+            <section className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                12. Contact Us
+              </h2>
+              <p>
+                If you have any questions, concerns, or feedback regarding these
+                Terms of Service, please contact us:
+              </p>
+              <div className="rounded-lg border bg-muted/50 p-4 space-y-1 text-sm">
+                <p className="font-medium text-foreground">EduCard AI</p>
+                <p>
+                  Email:{" "}
+                  <a
+                    href="mailto:hello@educardai.com"
+                    className="text-primary hover:underline"
+                  >
+                    hello@educardai.com
+                  </a>
+                </p>
+              </div>
+            </section>
+
+            {/* Copyright */}
+            <div className="border-t pt-8 text-sm text-muted-foreground">
+              <p>&copy; 2025 EduCard AI. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}

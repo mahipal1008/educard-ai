@@ -13,6 +13,7 @@ import {
 import {
   getSummaryPrompt,
   getSummarySystemPrompt,
+  type SummaryMode,
 } from "@/lib/prompts/summary-prompt";
 
 const MAX_RETRIES = 3;
@@ -90,10 +91,10 @@ export class AIGenerationService {
   /**
    * Generate a markdown summary from text content.
    */
-  static async generateSummary(text: string): Promise<string> {
+  static async generateSummary(text: string, mode: SummaryMode = "default"): Promise<string> {
     const response = await this.callGemini(
       getSummarySystemPrompt(),
-      getSummaryPrompt(text)
+      getSummaryPrompt(text, mode)
     );
 
     if (!response || response.trim().length === 0) {

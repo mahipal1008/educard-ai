@@ -6,26 +6,51 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CookieConsent } from "@/components/CookieConsent";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: {
-    default: "EduCard AI — Turn Any Content Into Flashcards & Quizzes",
+    default: "EduCard AI — Turn Any Content Into Flashcards & Quizzes Instantly",
     template: "%s | EduCard AI",
   },
   description:
-    "Transform YouTube videos and PDFs into smart flashcards, quizzes, and summaries using AI. Study smarter, not harder.",
+    "GPU-accelerated AI study platform. Upload YouTube, PDF, or images and get instant flashcards, quizzes, voice tutor, and exam predictions.",
   keywords: [
-    "flashcards",
-    "quiz",
-    "AI",
-    "study",
-    "youtube",
-    "pdf",
-    "education",
+    "AI flashcards",
+    "study app",
+    "exam predictor",
+    "voice tutor",
+    "GPU AI",
+    "youtube flashcards",
+    "pdf quiz",
     "spaced repetition",
+    "education",
+    "AI study tools",
   ],
+  authors: [{ name: "EduCard AI" }],
+  creator: "EduCard AI",
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "EduCard AI",
+    title: "EduCard AI — Turn Any Content Into Flashcards & Quizzes Instantly",
+    description:
+      "GPU-accelerated AI study platform. Upload YouTube, PDF, or images and get instant flashcards, quizzes, voice tutor, and exam predictions.",
+    url: "https://educardai.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@educardai",
+    title: "EduCard AI — Turn Any Content Into Flashcards & Quizzes Instantly",
+    description:
+      "GPU-accelerated AI study platform. Upload YouTube, PDF, or images and get instant flashcards, quizzes, voice tutor, and exam predictions.",
+  },
+  alternates: {
+    canonical: "https://educardai.com",
+  },
 };
 
 export default function RootLayout({
@@ -50,6 +75,7 @@ export default function RootLayout({
           <TooltipProvider>
             {children}
             <Toaster richColors position="bottom-right" />
+            <CookieConsent />
           </TooltipProvider>
         </ThemeProvider>
       </body>

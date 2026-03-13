@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { GraduationCap, Moon, Sun, LogOut, Settings, Zap, CreditCard, Rocket } from "lucide-react";
+import { GraduationCap, Moon, Sun, LogOut, Settings, Zap, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -95,10 +95,11 @@ export function Navbar({ showAuth = false }: NavbarProps) {
             <Link href="/#pricing">
               <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">Pricing</Button>
             </Link>
-            <Link href="/features">
-              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground gap-1.5">
-                <Rocket className="h-3.5 w-3.5" /> Roadmap
-              </Button>
+            <Link href="/about">
+              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">About</Button>
+            </Link>
+            <Link href="/blog">
+              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">Blog</Button>
             </Link>
           </nav>
         )}

@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Home, ArrowLeft } from "lucide-react";
+import { GraduationCap, Home, MessageCircle } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
+    <div className="flex min-h-screen items-center justify-center px-4 bg-background">
       <div className="text-center max-w-md">
         <div className="flex justify-center mb-6">
           <div className="relative">
@@ -20,10 +20,10 @@ export default function NotFound() {
         </div>
 
         <h1 className="text-7xl font-bold text-primary mb-2">404</h1>
-        <h2 className="text-2xl font-semibold mb-3">Page not found</h2>
+        <h2 className="text-2xl font-semibold mb-3">This page took the wrong exam...</h2>
         <p className="text-muted-foreground mb-8">
-          The page you&apos;re looking for doesn&apos;t exist or has been moved.
-          Let&apos;s get you back on track.
+          Looks like this page didn&apos;t study hard enough and got lost.
+          Let&apos;s get you back to learning.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -33,15 +33,12 @@ export default function NotFound() {
               Go Home
             </Button>
           </Link>
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={() => window.history.back()}
-            className="gap-2 w-full sm:w-auto"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Go Back
-          </Button>
+          <Link href="/contact">
+            <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+              <MessageCircle className="h-4 w-4" />
+              Contact Us
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

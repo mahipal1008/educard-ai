@@ -1,0 +1,55 @@
+import { Sparkles, Linkedin } from "lucide-react";
+
+const team = [
+  {
+    name: "asdf",
+    role: "Founder & Full-Stack Developer",
+    bio: "Building the future of AI-powered education.",
+    initials: "MK",
+    color: "bg-primary",
+  },
+];
+
+export function Team() {
+  return (
+    <section className="py-24 md:py-32 relative" id="team">
+      <div className="absolute inset-0 dot-pattern opacity-50" />
+
+      <div className="mx-auto max-w-7xl px-4 md:px-6 relative">
+        <div className="text-center mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 rounded-full border bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary mb-6">
+            <Sparkles className="h-4 w-4" />
+            Our Team
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Meet the <span className="gradient-text">builder</span>
+          </h2>
+          <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
+            EduCard AI is built by a passionate developer who believes AI can make studying smarter for everyone.
+          </p>
+        </div>
+
+        <div className="flex justify-center">
+          {team.map((member) => (
+            <div
+              key={member.name}
+              className="relative group rounded-2xl border-2 bg-card p-8 text-center max-w-sm hover-lift transition-all hover:border-primary/30"
+            >
+              <div className={`h-20 w-20 rounded-full ${member.color} text-primary-foreground flex items-center justify-center mx-auto mb-5 text-2xl font-bold`}>
+                {member.initials}
+              </div>
+              <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+              <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
+              <p className="text-sm text-muted-foreground">{member.bio}</p>
+              <div className="mt-4 flex justify-center">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer">
+                  <Linkedin className="h-4 w-4 text-muted-foreground" />
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

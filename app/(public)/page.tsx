@@ -3,11 +3,12 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/landing/Hero";
 import { Features } from "@/components/landing/Features";
+import { Demo } from "@/components/landing/Demo";
 import { HowItWorks } from "@/components/landing/HowItWorks";
+import { Team } from "@/components/landing/Team";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { Pricing } from "@/components/landing/Pricing";
 import { CTABanner } from "@/components/landing/CTABanner";
-import { FAQ } from "@/components/landing/FAQ";
 
 export default function LandingPage() {
   return (
@@ -16,11 +17,12 @@ export default function LandingPage() {
       <main className="flex-1">
         <Hero />
         <Features />
+        <Demo />
         <HowItWorks />
+        <Team />
         <Testimonials />
         <Pricing />
         <CTABanner />
-        <FAQ />
       </main>
       <Footer />
     </div>

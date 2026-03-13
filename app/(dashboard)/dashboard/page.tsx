@@ -8,6 +8,7 @@ import { QuickActions } from "@/components/dashboard/QuickActions";
 import { WelcomeOnboarding } from "@/components/dashboard/WelcomeOnboarding";
 import { WeakTopicDashboard } from "@/components/WeakTopicDashboard";
 import { SmartStudyButton } from "@/components/SmartStudyButton";
+import { toast } from "sonner";
 import type { UserStats, DocumentWithRelations } from "@/types";
 
 export default function DashboardPage() {
@@ -33,8 +34,8 @@ export default function DashboardPage() {
         if (statsJson.data) setStats(statsJson.data);
         if (docsJson.data) setDocuments(docsJson.data);
         if (profileJson.data?.full_name) setUserName(profileJson.data.full_name);
-      } catch (error) {
-        console.error("Failed to fetch dashboard data:", error);
+      } catch {
+        toast.error("Failed to load dashboard data. Please refresh the page.");
       } finally {
         setLoadingStats(false);
         setLoadingDocs(false);

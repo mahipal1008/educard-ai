@@ -1,19 +1,31 @@
 // FILE: app/api/generate/summary/route.ts
 
 import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { AIGenerationService } from "@/lib/services/ai-generation";
 import { z } from "zod";
+import type { SummaryMode } from "@/lib/prompts/summary-prompt";
 
 const inputSchema = z.object({
   documentId: z.string().uuid(),
-  userId: z.string().uuid(),
+  summaryMode: z
+    .enum(["default", "bullet", "cornell", "outline", "mindmap"])
+    .optional()
+    .default("default"),
 });
 
-export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
     const validation = inputSchema.safeParse(body);
 
@@ -24,33 +36,56 @@ export async function POST(request: Request) {
       );
     }
 
-    const { documentId } = validation.data;
+    const { documentId, summaryMode } = validation.data;
     const admin = createAdminClient();
 
-    // Fetch transcript text
+    // Verify the document belongs to this user
     const { data: document, error: fetchError } = await admin
       .from("documents")
-      .select("transcript_text")
+      .select("transcript_text, user_id")
       .eq("id", documentId)
       .single();
 
-    if (fetchError || !document?.transcript_text) {
+    if (fetchError || !document) {
+      return NextResponse.json(
+        { error: "Document not found" },
+        { status: 404 }
+      );
+    }
+
+    if (document.user_id !== user.id) {
+      return NextResponse.json(
+        { error: "You can only regenerate summaries for your own documents" },
+        { status: 403 }
+      );
+    }
+
+    if (!document.transcript_text) {
       return NextResponse.json(
         { error: "Document transcript not found" },
         { status: 404 }
       );
     }
 
-    // Generate summary
+    // Generate summary with the specified mode
     const summary = await AIGenerationService.generateSummary(
-      document.transcript_text
+      document.transcript_text,
+      summaryMode as SummaryMode
     );
 
     // Update document with summary
-    await admin
+    const { error: updateError } = await admin
       .from("documents")
       .update({ summary })
       .eq("id", documentId);
+
+    if (updateError) {
+      console.error("Failed to save summary:", updateError);
+      return NextResponse.json(
+        { error: "Summary generated but failed to save" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ data: { summary } });
   } catch (error) {

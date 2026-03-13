@@ -2,18 +2,19 @@
 import {
   Youtube,
   FileText,
-  BrainCircuit,
+  Mic,
+  Camera,
+  Brain,
+  Globe,
   Sparkles,
-  BarChart3,
-  Share2,
 } from "lucide-react";
 
 const features = [
   {
     icon: Youtube,
-    title: "YouTube to Flashcards",
+    title: "YouTube → Flashcards",
     description:
-      "Paste any YouTube URL and our AI extracts the transcript, then generates flashcards and quiz questions automatically.",
+      "Paste any YouTube link and get a full study deck in 30 seconds.",
     color: "text-red-500",
     bg: "bg-red-500/10",
     borderHover: "hover:border-red-500/30",
@@ -21,49 +22,49 @@ const features = [
   },
   {
     icon: FileText,
-    title: "PDF to Study Material",
+    title: "PDF → Quiz",
     description:
-      "Upload any PDF document — textbook chapters, lecture notes, research papers — and get instant study aids.",
+      "Upload lecture notes and get MCQs, summaries, and key terms.",
     color: "text-blue-500",
     bg: "bg-blue-500/10",
     borderHover: "hover:border-blue-500/30",
     gradient: "from-blue-500/10 to-transparent",
   },
   {
-    icon: BrainCircuit,
-    title: "Smart Spaced Repetition",
+    icon: Mic,
+    title: "Voice Doubt Solver",
     description:
-      "Our SM-2 algorithm schedules reviews at optimal intervals so you remember more while studying less.",
+      "Ask doubts by voice. Get instant spoken answers from your AI tutor.",
     color: "text-purple-500",
     bg: "bg-purple-500/10",
     borderHover: "hover:border-purple-500/30",
     gradient: "from-purple-500/10 to-transparent",
   },
   {
-    icon: Sparkles,
-    title: "AI-Powered Quizzes",
+    icon: Camera,
+    title: "Image Q&A",
     description:
-      "Automatically generate multiple-choice quizzes from any document to test your understanding and track progress.",
+      "Photo a diagram or equation — AI explains and quizzes you on it.",
     color: "text-amber-500",
     bg: "bg-amber-500/10",
     borderHover: "hover:border-amber-500/30",
     gradient: "from-amber-500/10 to-transparent",
   },
   {
-    icon: BarChart3,
-    title: "Progress Analytics",
+    icon: Brain,
+    title: "Exam Predictor",
     description:
-      "Track your study streaks, quiz scores, and retention rates with beautiful dashboards and insights.",
+      "Upload past papers. AI predicts your most likely exam questions.",
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
     borderHover: "hover:border-emerald-500/30",
     gradient: "from-emerald-500/10 to-transparent",
   },
   {
-    icon: Share2,
-    title: "Share & Collaborate",
+    icon: Globe,
+    title: "Multilingual",
     description:
-      "Make any deck public with a shareable link. Perfect for study groups, classrooms, and teaching assistants.",
+      "Study in Hindi, Tamil, Bengali, or 20+ languages with one click.",
     color: "text-pink-500",
     bg: "bg-pink-500/10",
     borderHover: "hover:border-pink-500/30",

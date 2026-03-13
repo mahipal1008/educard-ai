@@ -9,6 +9,7 @@ import {
   Library,
   Settings,
   Brain,
+  Network,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +17,7 @@ const mobileLinks = [
   { href: "/dashboard", label: "Home", icon: LayoutDashboard },
   { href: "/create", label: "Create", icon: PlusCircle },
   { href: "/library", label: "Library", icon: Library },
+  { href: "/diagram-generator", label: "Diagram", icon: Network },
   { href: "/exam-predictor", label: "Predict", icon: Brain },
   { href: "/settings", label: "Settings", icon: Settings },
 ];

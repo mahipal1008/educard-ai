@@ -106,7 +106,7 @@ export function Hero() {
                 ))}
               </div>
               <div className="text-left">
-                <p className="text-sm font-semibold">2,000+ students</p>
+                <p className="text-sm font-semibold">500+ students</p>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
@@ -122,12 +122,12 @@ export function Hero() {
             {/* Stats */}
             <div className="flex items-center gap-6 text-center">
               <div>
-                <div className="text-lg font-bold">50K+</div>
-                <div className="text-xs text-muted-foreground">Cards Created</div>
+                <div className="text-lg font-bold">10K+</div>
+                <div className="text-xs text-muted-foreground">Flashcards Created</div>
               </div>
               <div className="h-8 w-px bg-border" />
               <div>
-                <div className="text-lg font-bold">10K+</div>
+                <div className="text-lg font-bold">5K+</div>
                 <div className="text-xs text-muted-foreground">Quizzes Taken</div>
               </div>
               <div className="h-8 w-px bg-border" />

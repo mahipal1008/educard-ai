@@ -101,7 +101,7 @@ export function VoiceDoubtSolver() {
       } else if (event.error === "not-allowed") {
         setError("Microphone access denied. Please check browser permissions.");
       } else {
-        setError(`Speech recognition error: ${event.error}`);
+        setError("Something went wrong with speech recognition. Please try again.");
       }
       setIsRecording(false);
     };
@@ -310,8 +310,13 @@ export function VoiceDoubtSolver() {
             <div className="text-center py-6 space-y-3">
               <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
               <p className="text-xs text-muted-foreground">
-                Answering your question...
+                AI is thinking about your question...
               </p>
+              {transcript && (
+                <div className="rounded-lg bg-muted/50 p-2.5 text-left">
+                  <p className="text-xs text-muted-foreground">{transcript}</p>
+                </div>
+              )}
             </div>
           )}
 

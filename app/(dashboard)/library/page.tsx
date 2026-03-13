@@ -41,6 +41,7 @@ export default function LibraryPage() {
   const [sortBy, setSortBy] = useState<SortBy>("newest");
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -49,6 +50,7 @@ export default function LibraryPage() {
         const json = await res.json();
         if (json.data) setDocuments(json.data);
       } catch {
+        setFetchError(true);
         toast.error("Failed to load documents");
       } finally {
         setLoading(false);
@@ -169,11 +171,13 @@ export default function LibraryPage() {
             )}
           </div>
           <h3 className="text-xl font-semibold mb-2">
-            {search || filter !== "all" ? "No matching documents" : "Your library is empty"}
+            {search || filter !== "all" ? "No matching documents" : fetchError ? "Failed to load documents" : "Your library is empty"}
           </h3>
           <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
             {search || filter !== "all"
               ? "Try adjusting your search or filters to find what you're looking for."
+              : fetchError
+              ? "Something went wrong while loading your documents. Please try refreshing the page."
               : "Start by creating your first document from a YouTube video or PDF. Your study materials will appear here."}
           </p>
           {search || filter !== "all" ? (

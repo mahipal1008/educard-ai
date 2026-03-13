@@ -73,7 +73,10 @@ export default function DocumentPage() {
         publicSlug={document.deck?.public_slug ?? null}
       />
 
-      <SummaryCard summary={document.summary} />
+      <SummaryCard
+        summary={document.summary}
+        documentId={document.id}
+      />
 
       <ActionCards
         deckId={document.deck?.id ?? null}

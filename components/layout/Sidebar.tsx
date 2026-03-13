@@ -11,6 +11,8 @@ import {
   CreditCard,
   GraduationCap,
   Brain,
+  Layers,
+  Network,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +20,8 @@ const sidebarLinks = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/create", label: "Create New", icon: PlusCircle },
   { href: "/library", label: "Library", icon: Library },
+  { href: "/merge-decks", label: "Merge Decks", icon: Layers },
+  { href: "/diagram-generator", label: "Diagram AI", icon: Network },
   { href: "/exam-predictor", label: "Exam Predictor", icon: Brain },
   { href: "/settings", label: "Settings", icon: Settings },
   { href: "/pricing", label: "Pricing", icon: CreditCard },

@@ -13,7 +13,14 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, CreditCard, Shield, Loader2 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { User, CreditCard, Shield, Loader2, SlidersHorizontal, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -26,10 +33,28 @@ const profileSchema = z.object({
 
 type ProfileFormData = z.infer<typeof profileSchema>;
 
+interface AIPreferences {
+  difficulty: "easy" | "medium" | "hard" | "adaptive";
+  cardDensity: "fewer" | "standard" | "more";
+  summaryMode: "default" | "bullet" | "cornell" | "outline" | "mindmap";
+  focusAreas: string;
+  quizStyle: "conceptual" | "factual" | "application" | "mixed";
+}
+
+const defaultPrefs: AIPreferences = {
+  difficulty: "medium",
+  cardDensity: "standard",
+  summaryMode: "default",
+  focusAreas: "",
+  quizStyle: "mixed",
+};
+
 export default function SettingsPage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [aiPrefs, setAiPrefs] = useState<AIPreferences>(defaultPrefs);
+  const [savingAI, setSavingAI] = useState(false);
   const supabase = createClient();
   const router = useRouter();
 
@@ -58,6 +83,14 @@ export default function SettingsPage() {
       }
     };
     fetchProfile();
+
+    // Load AI preferences from localStorage
+    try {
+      const stored = localStorage.getItem("educard-ai-prefs");
+      if (stored) setAiPrefs({ ...defaultPrefs, ...JSON.parse(stored) });
+    } catch {
+      // use defaults
+    }
   }, [reset]);
 
   const onSubmit = async (data: ProfileFormData) => {
@@ -79,6 +112,27 @@ export default function SettingsPage() {
     }
   };
 
+  const saveAIPrefs = async () => {
+    setSavingAI(true);
+    try {
+      const res = await fetch("/api/user/ai-preferences", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(aiPrefs),
+      });
+      if (!res.ok) {
+        const json = await res.json();
+        throw new Error(json.error || "Failed to save AI preferences");
+      }
+      localStorage.setItem("educard-ai-prefs", JSON.stringify(aiPrefs));
+      toast.success("AI preferences saved");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to save AI preferences");
+    } finally {
+      setSavingAI(false);
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.push("/");
@@ -88,6 +142,7 @@ export default function SettingsPage() {
   const initials = profile?.full_name
     ? profile.full_name
         .split(" ")
+        .filter(Boolean)
         .map((n) => n[0])
         .join("")
         .toUpperCase()
@@ -152,6 +207,116 @@ export default function SettingsPage() {
               Save Changes
             </Button>
           </form>
+        </CardContent>
+      </Card>
+
+      {/* AI Model Adjustment */}
+      <Card className="border-2 border-primary/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <SlidersHorizontal className="h-5 w-5 text-primary" />
+            AI Model Adjustment
+            <Badge variant="secondary" className="ml-2 text-xs gap-1">
+              <Sparkles className="h-3 w-3" /> New
+            </Badge>
+          </CardTitle>
+          <CardDescription>
+            Fine-tune how AI generates your study materials. These preferences apply to all new content.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          <div className="space-y-2">
+            <Label>Difficulty Level</Label>
+            <Select
+              value={aiPrefs.difficulty}
+              onValueChange={(v) => setAiPrefs((p) => ({ ...p, difficulty: v as AIPreferences["difficulty"] }))}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="easy">Easy — Simple language, basic concepts</SelectItem>
+                <SelectItem value="medium">Medium — Standard academic level</SelectItem>
+                <SelectItem value="hard">Hard — Advanced, exam-level depth</SelectItem>
+                <SelectItem value="adaptive">Adaptive — AI adjusts based on performance</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Flashcard Density</Label>
+            <Select
+              value={aiPrefs.cardDensity}
+              onValueChange={(v) => setAiPrefs((p) => ({ ...p, cardDensity: v as AIPreferences["cardDensity"] }))}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="fewer">Fewer Cards — Key concepts only (~5-8)</SelectItem>
+                <SelectItem value="standard">Standard — Balanced coverage (~10-15)</SelectItem>
+                <SelectItem value="more">More Cards — Detailed coverage (~20-25)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Default Summary Style</Label>
+            <Select
+              value={aiPrefs.summaryMode}
+              onValueChange={(v) => setAiPrefs((p) => ({ ...p, summaryMode: v as AIPreferences["summaryMode"] }))}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">Default — TL;DR + Key Points + Terms</SelectItem>
+                <SelectItem value="bullet">Bullet Points — Concise bullet format</SelectItem>
+                <SelectItem value="cornell">Cornell Notes — Questions + Notes + Summary</SelectItem>
+                <SelectItem value="outline">Outline — Hierarchical structure</SelectItem>
+                <SelectItem value="mindmap">Mind Map — Central topic with branches</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Quiz Question Style</Label>
+            <Select
+              value={aiPrefs.quizStyle}
+              onValueChange={(v) => setAiPrefs((p) => ({ ...p, quizStyle: v as AIPreferences["quizStyle"] }))}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="mixed">Mixed — All question types</SelectItem>
+                <SelectItem value="conceptual">Conceptual — Understanding & reasoning</SelectItem>
+                <SelectItem value="factual">Factual — Definitions & recall</SelectItem>
+                <SelectItem value="application">Application — Problem solving & examples</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="focus-areas">Focus Areas (optional)</Label>
+            <Input
+              id="focus-areas"
+              placeholder="e.g. cell biology, thermodynamics, organic chemistry"
+              value={aiPrefs.focusAreas}
+              maxLength={500}
+              onChange={(e) => setAiPrefs((p) => ({ ...p, focusAreas: e.target.value }))}
+            />
+            <p className="text-xs text-muted-foreground">
+              Comma-separated topics the AI should emphasize when generating content.
+            </p>
+          </div>
+
+          <Separator />
+
+          <Button onClick={saveAIPrefs} disabled={savingAI} className="gap-2">
+            {savingAI && <Loader2 className="h-4 w-4 animate-spin" />}
+            Save AI Preferences
+          </Button>
         </CardContent>
       </Card>
 

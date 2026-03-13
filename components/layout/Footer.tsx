@@ -24,15 +24,15 @@ export function Footer() {
               Transform any YouTube video or PDF into smart flashcards, quizzes, and summaries — powered by advanced AI.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer">
+              <a href="https://twitter.com/educardai" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors">
                 <Twitter className="h-4 w-4 text-muted-foreground" />
-              </span>
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer">
+              </a>
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors">
                 <Github className="h-4 w-4 text-muted-foreground" />
-              </span>
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer">
+              </a>
+              <a href="https://linkedin.com/company/educardai" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors">
                 <Linkedin className="h-4 w-4 text-muted-foreground" />
-              </span>
+              </a>
             </div>
           </div>
 
@@ -40,11 +40,11 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">Product</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><Link href="/#features" className="hover:text-primary transition-colors">Features</Link></li>
+              <li><Link href="/features" className="hover:text-primary transition-colors">All Features</Link></li>
               <li><Link href="/#pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
-              <li><Link href="/features" className="hover:text-primary transition-colors">Coming Soon</Link></li>
+              <li><Link href="/upcoming" className="hover:text-primary transition-colors">Coming Soon</Link></li>
+              <li><Link href="/demo" className="hover:text-primary transition-colors">Interactive Demo</Link></li>
               <li><Link href="/login" className="hover:text-primary transition-colors">Sign In</Link></li>
-              <li><Link href="/signup" className="hover:text-primary transition-colors">Get Started</Link></li>
             </ul>
           </div>
 
@@ -52,20 +52,22 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">Resources</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li>YouTube to Flashcards</li>
-              <li>PDF to Quizzes</li>
-              <li>Spaced Repetition</li>
-              <li>AI Summaries</li>
+              <li><Link href="/youtube-to-flashcards" className="hover:text-primary transition-colors">YouTube to Flashcards</Link></li>
+              <li><Link href="/pdf-to-quizzes" className="hover:text-primary transition-colors">PDF to Quizzes</Link></li>
+              <li><Link href="/how-it-works" className="hover:text-primary transition-colors">How It Works</Link></li>
+              <li><Link href="/spaced-repetition" className="hover:text-primary transition-colors">Spaced Repetition</Link></li>
             </ul>
           </div>
 
-          {/* Support */}
+          {/* Company */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">Support</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">Company</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><span className="hover:text-primary transition-colors cursor-pointer">Help Center</span></li>
-              <li><span className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</span></li>
-              <li><span className="hover:text-primary transition-colors cursor-pointer">Terms of Service</span></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
+              <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+              <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
