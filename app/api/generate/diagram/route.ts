@@ -65,6 +65,8 @@ timeline
 
 export async function POST(request: Request) {
   try {
+    const body = await request.json();
+
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -72,7 +74,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await request.json();
     const validation = diagramSchema.safeParse(body);
 
     if (!validation.success) {

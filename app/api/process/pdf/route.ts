@@ -30,16 +30,9 @@ function getWaitUntil(): ((promise: Promise<unknown>) => void) | null {
 
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
+    // IMPORTANT: Read body FIRST before any Supabase calls.
+    // On Cloudflare edge, cookies()/createClient() can consume the request
+    // body stream, making subsequent request.formData() return empty.
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
     const aiPrefsRaw = formData.get("aiPrefs") as string | null;
@@ -50,6 +43,16 @@ export async function POST(request: Request) {
         { error: "No file provided" },
         { status: 400 }
       );
+    }
+
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Validate file

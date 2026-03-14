@@ -15,7 +15,8 @@ export const runtime = "edge";
 
 export async function POST(request: Request) {
   try {
-    // Auth check
+    const body = await request.json();
+
     const supabase = await createClient();
     const {
       data: { user },
@@ -24,8 +25,6 @@ export async function POST(request: Request) {
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const body = await request.json();
     const validation = inputSchema.safeParse(body);
 
     if (!validation.success) {

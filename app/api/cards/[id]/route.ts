@@ -44,6 +44,8 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    const body = await request.json();
+
     const supabase = await createClient();
     const {
       data: { user },
@@ -53,8 +55,6 @@ export async function PUT(
     if (authError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const body = await request.json();
     const validation = updateCardSchema.safeParse(body);
 
     if (!validation.success) {

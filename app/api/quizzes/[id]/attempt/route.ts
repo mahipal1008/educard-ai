@@ -22,6 +22,8 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
+    const body = await request.json();
+
     const supabase = await createClient();
     const {
       data: { user },
@@ -31,8 +33,6 @@ export async function POST(
     if (authError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const body = await request.json();
     const validation = submitAttemptSchema.safeParse(body);
 
     if (!validation.success) {
