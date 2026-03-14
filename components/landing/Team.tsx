@@ -1,12 +1,13 @@
-import { Sparkles } from "lucide-react";
+import { Linkedin, Sparkles } from "lucide-react";
 
 const team = [
   {
-    name: " Ravi Roy",
+    name: "Ravi Roy",
     role: "Founder & Full-Stack Developer",
     bio: "Building the future of AI-powered education.",
     initials: "RR",
     color: "bg-primary",
+    linkedin: "https://www.linkedin.com/in/ravi-roy-ai/",
   },
 ];
 
@@ -41,6 +42,15 @@ export function Team() {
               <h3 className="text-xl lg:text-2xl font-bold mb-1">{member.name}</h3>
               <p className="text-sm lg:text-base text-primary font-medium mb-3">{member.role}</p>
               <p className="text-sm lg:text-base text-muted-foreground">{member.bio}</p>
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                aria-label={`${member.name} LinkedIn`}
+              >
+                <Linkedin className="h-4 w-4 text-muted-foreground" />
+              </a>
             </div>
           ))}
         </div>

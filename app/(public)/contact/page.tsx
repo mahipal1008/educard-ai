@@ -190,11 +190,10 @@ export default function ContactPage() {
                       <div>
                         <p className="text-sm font-medium">Email</p>
                         <a
-                          href="mailto:hello@educardai.com"
+                          href="mailto:raviray@educard-ai.indevs.in"
                           className="text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
-                          hello@educardai.com
-                        </a>
+                          raviray@educard-ai.indevs.in                        </a>
                       </div>
                     </div>
 

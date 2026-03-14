@@ -76,11 +76,10 @@ export default function TermsPage() {
                 <li>
                   Notify us immediately at{" "}
                   <a
-                    href="mailto:hello@educardai.com"
+                    href="mailto:raviray@educard-ai.indevs.in"
                     className="text-primary hover:underline"
                   >
-                    hello@educardai.com
-                  </a>{" "}
+                    raviray@educard-ai.indevs.in                  </a>{" "}
                   if you suspect any unauthorized use of your account.
                 </li>
               </ul>
@@ -224,11 +223,10 @@ export default function TermsPage() {
                   renewal, provided you have not substantially used the Service
                   during that period. To request a refund, contact us at{" "}
                   <a
-                    href="mailto:hello@educardai.com"
+                    href="mailto:raviray@educard-ai.indevs.in"
                     className="text-primary hover:underline"
                   >
-                    hello@educardai.com
-                  </a>
+                    raviray@educard-ai.indevs.in                  </a>
                   .
                 </li>
                 <li>
@@ -345,11 +343,10 @@ export default function TermsPage() {
                 first attempt to resolve any dispute informally by contacting us
                 at{" "}
                 <a
-                  href="mailto:hello@educardai.com"
+                  href="mailto:raviray@educard-ai.indevs.in"
                   className="text-primary hover:underline"
                 >
-                  hello@educardai.com
-                </a>
+                  raviray@educard-ai.indevs.in                </a>
                 . We will make a good-faith effort to resolve the matter within
                 30 days.
               </p>
@@ -369,11 +366,10 @@ export default function TermsPage() {
                 <p>
                   Email:{" "}
                   <a
-                    href="mailto:hello@educardai.com"
+                    href="mailto:raviray@educard-ai.indevs.in"
                     className="text-primary hover:underline"
                   >
-                    hello@educardai.com
-                  </a>
+                    raviray@educard-ai.indevs.in                  </a>
                 </p>
               </div>
             </section>

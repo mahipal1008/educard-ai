@@ -82,7 +82,7 @@ export function Footer() {
               &copy; {new Date().getFullYear()} EduCard AI. All rights reserved.
             </p>
             <p className="text-xs text-muted-foreground/60">
-              Made with AI — Built for students, by students.
+              Made with ❤️.
             </p>
           </div>
         </div>

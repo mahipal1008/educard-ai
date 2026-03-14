@@ -243,11 +243,10 @@ export default function PrivacyPolicyPage() {
                   If you have any questions or concerns about this Privacy
                   Policy or our data practices, please reach out to us at{" "}
                   <a
-                    href="mailto:hello@educardai.com"
+                    href="mailto:raviray@educard-ai.indevs.in"
                     className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
                   >
-                    hello@educardai.com
-                  </a>
+                    raviray@educard-ai.indevs.in                  </a>
                   . We take every inquiry seriously and will do our best to
                   address your concerns promptly.
                 </p>

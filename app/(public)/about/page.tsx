@@ -14,7 +14,6 @@ import {
   Cpu,
   Globe,
   Linkedin,
-  Github,
   Mail,
   MapPin,
   Calendar,
@@ -55,31 +54,12 @@ const values = [
 
 const team = [
   {
-    name: " Ravi Roy",
+    name: "Ravi Roy",
     initials: "RR",
-    role: "Founder & CEO",
+    role: "Founder, CEO & Full-Stack Developer",
     bio: "Full-stack engineer and AI builder. Building EduCard AI to make exam prep smarter for every student in India and beyond.",
     gradient: "from-violet-500 to-fuchsia-500",
-    linkedin: "#",
-    github: "#",
-  },
-  {
-    name: "Arjun Singh",
-    initials: "AS",
-    role: "AI Research Lead",
-    bio: "Specializing in NLP and GPU-accelerated inference. Making AI study tools faster and smarter.",
-    gradient: "from-cyan-500 to-blue-500",
-    linkedin: "#",
-    github: "#",
-  },
-  {
-    name: "Neha Sharma",
-    initials: "NS",
-    role: "Product Designer",
-    bio: "Designing intuitive learning experiences. Previously at EdTech startups across India.",
-    gradient: "from-amber-500 to-orange-500",
-    linkedin: "#",
-    github: "#",
+    linkedin: "https://www.linkedin.com/in/ravi-roy-ai/",
   },
 ];
 
@@ -94,14 +74,14 @@ const companyInfo = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Bhagalpur, India (Global)",
+    value: "Delhi, India (Global)",
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "hello@educardai.com",
+    value: "raviray@educard-ai.indevs.in",
     color: "text-blue-500",
     bg: "bg-blue-500/10",
   },
@@ -136,7 +116,7 @@ export default function AboutPage() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText("hello@educardai.com");
+    await navigator.clipboard.writeText("raviray@educard-ai.indevs.in");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -231,11 +211,11 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex justify-center">
               {team.map((member) => (
                 <Card
                   key={member.name}
-                  className="relative overflow-hidden border-2 transition-all duration-300 hover-lift bg-card"
+                  className="relative overflow-hidden border-2 transition-all duration-300 hover-lift bg-card w-full max-w-sm"
                 >
                   <CardContent className="flex flex-col items-center text-center pt-8 pb-6">
                     {/* Avatar with gradient ring */}
@@ -265,15 +245,6 @@ export default function AboutPage() {
                         aria-label={`${member.name} LinkedIn`}
                       >
                         <Linkedin className="h-4 w-4 text-muted-foreground" />
-                      </a>
-                      <a
-                        href={member.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex h-9 w-9 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors"
-                        aria-label={`${member.name} GitHub`}
-                      >
-                        <Github className="h-4 w-4 text-muted-foreground" />
                       </a>
                     </div>
                   </CardContent>
@@ -342,11 +313,10 @@ export default function AboutPage() {
             {/* Large styled email */}
             <div className="inline-flex flex-col sm:flex-row items-center gap-4 rounded-2xl border-2 bg-card px-8 py-6">
               <a
-                href="mailto:hello@educardai.com"
+                href="mailto:raviray@educard-ai.indevs.in"
                 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary hover:underline underline-offset-4 transition-colors"
               >
-                hello@educardai.com
-              </a>
+                raviray@educard-ai.indevs.in              </a>
               <Button
                 variant="outline"
                 size="sm"

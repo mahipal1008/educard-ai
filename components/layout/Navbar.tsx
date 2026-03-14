@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { GraduationCap, Moon, Sun, LogOut, Settings, Zap, CreditCard, Menu } from "lucide-react";
+import { GraduationCap, Moon, Sun, LogOut, Settings, Zap, CreditCard, Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -88,21 +88,54 @@ export function Navbar({ showAuth = false }: NavbarProps) {
         {/* Center nav links (public/landing only) */}
         {!showAuth && (
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            <Link href="/#features">
-              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">Features</Button>
-            </Link>
-            <Link href="/#how-it-works">
-              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">How It Works</Button>
-            </Link>
-            <Link href="/#pricing">
-              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">Pricing</Button>
-            </Link>
-            <Link href="/about">
-              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">About</Button>
-            </Link>
-            <Link href="/blog">
-              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">Blog</Button>
-            </Link>
+            {/* Product dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={<Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground gap-1" />}
+              >
+                Product <ChevronDown className="h-3.5 w-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                <DropdownMenuItem onClick={() => router.push("/features")}>All Features</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/#pricing")}>Pricing</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/upcoming")}>Coming Soon</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/demo")}>Interactive Demo</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => router.push("/login")}>Sign In</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Resources dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={<Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground gap-1" />}
+              >
+                Resources <ChevronDown className="h-3.5 w-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-52">
+                <DropdownMenuItem onClick={() => router.push("/youtube-to-flashcards")}>YouTube to Flashcards</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/pdf-to-quizzes")}>PDF to Quizzes</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/how-it-works")}>How It Works</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/spaced-repetition")}>Spaced Repetition</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Company dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={<Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground gap-1" />}
+              >
+                Company <ChevronDown className="h-3.5 w-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                <DropdownMenuItem onClick={() => router.push("/about")}>About</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/blog")}>Blog</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/contact")}>Contact</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => router.push("/privacy")}>Privacy Policy</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/terms")}>Terms of Service</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
         )}
 
@@ -118,12 +151,47 @@ export function Navbar({ showAuth = false }: NavbarProps) {
               </SheetTrigger>
               <SheetContent side="left" className="w-64 pt-10">
                 <nav className="flex flex-col gap-1">
+                  <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Product</p>
                   {[
-                    { href: "/#features", label: "Features" },
-                    { href: "/#how-it-works", label: "How It Works" },
+                    { href: "/features", label: "All Features" },
                     { href: "/#pricing", label: "Pricing" },
+                    { href: "/upcoming", label: "Coming Soon" },
+                    { href: "/demo", label: "Interactive Demo" },
+                  ].map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <div className="border-t my-3" />
+                  <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Resources</p>
+                  {[
+                    { href: "/youtube-to-flashcards", label: "YouTube to Flashcards" },
+                    { href: "/pdf-to-quizzes", label: "PDF to Quizzes" },
+                    { href: "/how-it-works", label: "How It Works" },
+                    { href: "/spaced-repetition", label: "Spaced Repetition" },
+                  ].map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <div className="border-t my-3" />
+                  <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Company</p>
+                  {[
                     { href: "/about", label: "About" },
                     { href: "/blog", label: "Blog" },
+                    { href: "/contact", label: "Contact" },
+                    { href: "/privacy", label: "Privacy Policy" },
+                    { href: "/terms", label: "Terms of Service" },
                   ].map((link) => (
                     <Link
                       key={link.href}
