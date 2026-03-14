@@ -106,7 +106,7 @@ export default function SignupPage() {
               },
             }}
             theme={resolvedTheme === "dark" ? "dark" : "default"}
-            providers={["google"]}
+            providers={[]}
             redirectTo={`${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`}
             view="sign_up"
             showLinks={false}

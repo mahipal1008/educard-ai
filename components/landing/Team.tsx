@@ -1,8 +1,8 @@
-import { Sparkles, Linkedin } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const team = [
   {
-    name: "asdf",
+    name: " Ravi Roy",
     role: "Founder & Full-Stack Developer",
     bio: "Building the future of AI-powered education.",
     initials: "MK",
@@ -41,11 +41,6 @@ export function Team() {
               <h3 className="text-xl lg:text-2xl font-bold mb-1">{member.name}</h3>
               <p className="text-sm lg:text-base text-primary font-medium mb-3">{member.role}</p>
               <p className="text-sm lg:text-base text-muted-foreground">{member.bio}</p>
-              <div className="mt-4 flex justify-center">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer">
-                  <Linkedin className="h-4 w-4 text-muted-foreground" />
-                </span>
-              </div>
             </div>
           ))}
         </div>

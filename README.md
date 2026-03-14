@@ -8,7 +8,7 @@
 
 EduCard AI is an AI-powered study platform that transforms YouTube videos, PDFs, and images into smart flashcards, quizzes, summaries, and more. Built with Next.js, **NVIDIA NIM** inference microservices, and Supabase.
 
-> **Powered by NVIDIA NIM** — All AI inference runs through NVIDIA NIM API endpoints, leveraging Meta Llama 3.1 8B Instruct for text generation and Microsoft Phi-3 Vision for image understanding.
+> **Powered by NVIDIA NIM** — All AI inference runs through NVIDIA NIM API endpoints, leveraging Meta Llama 3.1 70B Instruct for text generation and Meta Llama 3.2 90B Vision for image understanding.
 
 ---
 
@@ -34,8 +34,8 @@ flowchart TD
     end
 
     subgraph NVIDIA["NVIDIA NIM (Cloud Inference)"]
-        LLM["meta/llama-3.1-8b-instruct"]
-        VIS["microsoft/phi-3-vision-128k-instruct"]
+        LLM["meta/llama-3.1-70b-instruct"]
+        VIS["meta/llama-3.2-90b-vision-instruct"]
     end
 
     subgraph Backend["Backend Services"]
@@ -95,8 +95,8 @@ flowchart TD
 | **Framework** | Next.js 14 (App Router) |
 | **Language** | TypeScript |
 | **Styling** | Tailwind CSS + shadcn/ui |
-| **AI (Text)** | NVIDIA NIM — `meta/llama-3.1-8b-instruct` |
-| **AI (Vision)** | NVIDIA NIM — `microsoft/phi-3-vision-128k-instruct` |
+| **AI (Text)** | NVIDIA NIM — `meta/llama-3.1-70b-instruct` |
+| **AI (Vision)** | NVIDIA NIM — `meta/llama-3.2-90b-vision-instruct` |
 | **Voice TTS** | ElevenLabs (with browser SpeechSynthesis fallback) |
 | **Voice STT** | Browser SpeechRecognition API |
 | **Database** | Supabase (PostgreSQL) |
@@ -143,8 +143,8 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 # NVIDIA NIM API
 NVIDIA_API_KEY=nvapi-your-key-here
 NVIDIA_NIM_BASE_URL=https://integrate.api.nvidia.com/v1
-NVIDIA_NIM_MODEL=meta/llama-3.1-8b-instruct
-NVIDIA_NIM_VISION_MODEL=microsoft/phi-3-vision-128k-instruct
+NVIDIA_NIM_MODEL=meta/llama-3.1-70b-instruct
+NVIDIA_NIM_VISION_MODEL=meta/llama-3.2-90b-vision-instruct
 
 # ElevenLabs TTS (optional)
 ELEVENLABS_API_KEY=your-elevenlabs-key
@@ -229,15 +229,15 @@ All API routes use the Edge runtime for Cloudflare compatibility. All AI calls g
 |----------|--------|-------------|-----------|
 | `/api/process/youtube` | POST | Process YouTube URL into transcript | — |
 | `/api/process/pdf` | POST | Upload & process PDF | — |
-| `/api/generate/flashcards` | POST | Generate flashcards from content | Llama 3.1 8B |
-| `/api/generate/quiz` | POST | Generate quiz from content | Llama 3.1 8B |
-| `/api/generate/summary` | POST | Generate summary from content | Llama 3.1 8B |
-| `/api/generate/diagram` | POST | Generate Mermaid.js diagrams | Llama 3.1 8B |
-| `/api/voice-doubt` | POST | Voice doubt solver (NIM + ElevenLabs) | Llama 3.1 8B |
-| `/api/exam-predictor` | POST | Predict exam questions from past papers | Llama 3.1 8B |
-| `/api/image-qa` | POST | Image-based Q&A | Phi-3 Vision |
-| `/api/ocr-notes` | POST | Handwriting OCR | Phi-3 Vision |
-| `/api/decks/[id]/translate` | POST | Translate deck to another language | Llama 3.1 8B |
+| `/api/generate/flashcards` | POST | Generate flashcards from content | Llama 3.1 70B |
+| `/api/generate/quiz` | POST | Generate quiz from content | Llama 3.1 70B |
+| `/api/generate/summary` | POST | Generate summary from content | Llama 3.1 70B |
+| `/api/generate/diagram` | POST | Generate Mermaid.js diagrams | Llama 3.1 70B |
+| `/api/voice-doubt` | POST | Voice doubt solver (NIM + ElevenLabs) | Llama 3.1 70B |
+| `/api/exam-predictor` | POST | Predict exam questions from past papers | Llama 3.1 70B |
+| `/api/image-qa` | POST | Image-based Q&A | Llama 3.2 90B Vision |
+| `/api/ocr-notes` | POST | Handwriting OCR | Llama 3.2 90B Vision |
+| `/api/decks/[id]/translate` | POST | Translate deck to another language | Llama 3.1 70B |
 | `/api/decks/smart-study` | GET | Get cards due for spaced repetition | — |
 | `/api/user/weak-topics` | GET | Get weak topic analysis | — |
 
@@ -289,7 +289,7 @@ This project is proprietary. All rights reserved.
 
 ## Author
 
-**Mahipal** — [GitHub](https://github.com/mahipal1008)
+**Ravi Roy** — [GitHub](https://github.com/mahipal1008)
 
 ---
 

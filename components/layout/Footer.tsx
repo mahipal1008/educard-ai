@@ -1,6 +1,6 @@
 // FILE: components/layout/Footer.tsx
 import Link from "next/link";
-import { GraduationCap, Github, Twitter, Linkedin } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
 export function Footer() {
   return (
@@ -23,17 +23,6 @@ export function Footer() {
             <p className="text-sm lg:text-base text-muted-foreground max-w-xs leading-relaxed">
               Transform any YouTube video or PDF into smart flashcards, quizzes, and summaries — powered by advanced AI.
             </p>
-            <div className="flex items-center gap-3 pt-2">
-              <a href="https://twitter.com/educardai" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors">
-                <Twitter className="h-4 w-4 lg:h-5 lg:w-5 text-muted-foreground" />
-              </a>
-              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors">
-                <Github className="h-4 w-4 lg:h-5 lg:w-5 text-muted-foreground" />
-              </a>
-              <a href="https://linkedin.com/company/educardai" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-colors">
-                <Linkedin className="h-4 w-4 lg:h-5 lg:w-5 text-muted-foreground" />
-              </a>
-            </div>
           </div>
 
           {/* Product */}

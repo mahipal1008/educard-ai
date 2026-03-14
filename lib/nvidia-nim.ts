@@ -35,7 +35,7 @@ export async function nimChat(
   const baseUrl =
     process.env.NVIDIA_NIM_BASE_URL || "https://integrate.api.nvidia.com/v1";
   const apiKey = process.env.NVIDIA_API_KEY;
-  const model = options?.model || process.env.NVIDIA_NIM_MODEL || "meta/llama-3.1-8b-instruct";
+  const model = options?.model || process.env.NVIDIA_NIM_MODEL || "meta/llama-3.1-70b-instruct";
 
   if (!apiKey) {
     throw new Error("NVIDIA_API_KEY is not set in environment variables.");
@@ -134,7 +134,7 @@ export async function nimVision(
   const model =
     options?.model ||
     process.env.NVIDIA_NIM_VISION_MODEL ||
-    "microsoft/phi-3-vision-128k-instruct";
+    "meta/llama-3.2-90b-vision-instruct";
 
   if (!apiKey) {
     throw new Error("NVIDIA_API_KEY is not set in environment variables.");

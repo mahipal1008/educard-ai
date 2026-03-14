@@ -58,7 +58,7 @@ export default function BlogPage() {
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-medium text-foreground">
-                  Asdf
+                   Ravi Roy
                 </span>
                 <div className="flex items-center gap-3 text-xs text-muted-foreground">
                   <span className="inline-flex items-center gap-1">
@@ -167,7 +167,7 @@ export default function BlogPage() {
               MK
             </div>
             <div>
-              <p className="font-semibold text-foreground">asdf</p>
+              <p className="font-semibold text-foreground"> Ravi Roy</p>
               <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                 Builder of EduCard AI. Passionate about making education
                 accessible through artificial intelligence and modern web
