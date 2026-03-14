@@ -22,13 +22,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await request.json();
+    let body: Record<string, unknown> = {};
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid request body" },
+        { status: 400 }
+      );
+    }
+
     const validation = youtubeUrlSchema.safeParse(body);
-    const aiPrefs = body.aiPrefs;
+    const aiPrefs = body?.aiPrefs as Record<string, unknown> | undefined;
 
     if (!validation.success) {
       return NextResponse.json(
-        { error: validation.error.issues[0].message },
+        { error: validation.error.issues[0].message, receivedKeys: Object.keys(body || {}) },
         { status: 400 }
       );
     }

@@ -169,7 +169,7 @@ export function Pricing() {
                   </ul>
 
                   {/* CTA */}
-                  <Link href={plan.name === "Enterprise" ? "/contact" : "/signup"}>
+                  <Link href={plan.name === "Enterprise" ? "/contact" : plan.name === "Pro" ? "/buy-premium" : "/signup"}>
                     <Button
                       className={`w-full h-12 lg:h-14 text-base lg:text-lg font-semibold ${
                         plan.popular

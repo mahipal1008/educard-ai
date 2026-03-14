@@ -5,7 +5,7 @@ const team = [
     name: " Ravi Roy",
     role: "Founder & Full-Stack Developer",
     bio: "Building the future of AI-powered education.",
-    initials: "MK",
+    initials: "RR",
     color: "bg-primary",
   },
 ];

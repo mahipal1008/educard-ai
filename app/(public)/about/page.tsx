@@ -56,7 +56,7 @@ const values = [
 const team = [
   {
     name: " Ravi Roy",
-    initials: "MK",
+    initials: "RR",
     role: "Founder & CEO",
     bio: "Full-stack engineer and AI builder. Building EduCard AI to make exam prep smarter for every student in India and beyond.",
     gradient: "from-violet-500 to-fuchsia-500",

@@ -106,12 +106,12 @@ export function Hero() {
                 ))}
               </div>
               <div className="text-left">
-                <p className="text-sm lg:text-base font-semibold">500+ students</p>
+                <p className="text-sm lg:text-base font-semibold">Early adopters</p>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
                   ))}
-                  <span className="text-xs text-muted-foreground ml-1">4.9/5</span>
+                  <span className="text-xs text-muted-foreground ml-1">5/5</span>
                 </div>
               </div>
             </div>
@@ -122,18 +122,18 @@ export function Hero() {
             {/* Stats */}
             <div className="flex items-center gap-3 sm:gap-6 lg:gap-8 text-center">
               <div>
-                <div className="text-lg lg:text-xl font-bold">10K+</div>
-                <div className="text-xs lg:text-sm text-muted-foreground">Flashcards Created</div>
+                <div className="text-lg lg:text-xl font-bold">20+</div>
+                <div className="text-xs lg:text-sm text-muted-foreground">AI Features</div>
               </div>
               <div className="h-8 w-px bg-border" />
               <div>
-                <div className="text-lg lg:text-xl font-bold">5K+</div>
-                <div className="text-xs lg:text-sm text-muted-foreground">Quizzes Taken</div>
+                <div className="text-lg lg:text-xl font-bold">3s</div>
+                <div className="text-xs lg:text-sm text-muted-foreground">Avg Generation</div>
               </div>
               <div className="h-8 w-px bg-border" />
               <div>
-                <div className="text-lg lg:text-xl font-bold">98%</div>
-                <div className="text-xs lg:text-sm text-muted-foreground">Satisfaction</div>
+                <div className="text-lg lg:text-xl font-bold">20+</div>
+                <div className="text-xs lg:text-sm text-muted-foreground">Languages</div>
               </div>
             </div>
           </div>

@@ -27,7 +27,7 @@ export function CTABanner() {
             </h2>
 
             <p className="mt-6 text-lg lg:text-xl text-white/80 max-w-xl mx-auto">
-              Join 500+ students who are already using AI to study smarter, not harder. Get started in under 30 seconds.
+              Start using AI to study smarter, not harder. Get started in under 30 seconds — completely free.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">

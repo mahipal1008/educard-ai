@@ -38,7 +38,9 @@ export async function nimChat(
   const model = options?.model || process.env.NVIDIA_NIM_MODEL || "meta/llama-3.1-70b-instruct";
 
   if (!apiKey) {
-    throw new Error("NVIDIA_API_KEY is not set in environment variables.");
+    throw new Error(
+      "NVIDIA_API_KEY is not set. Add it to Cloudflare Pages > Settings > Environment variables (Production)."
+    );
   }
 
   const messages: NIMMessage[] = [
@@ -137,7 +139,9 @@ export async function nimVision(
     "meta/llama-3.2-90b-vision-instruct";
 
   if (!apiKey) {
-    throw new Error("NVIDIA_API_KEY is not set in environment variables.");
+    throw new Error(
+      "NVIDIA_API_KEY is not set. Add it to Cloudflare Pages > Settings > Environment variables (Production)."
+    );
   }
 
   const messages = [

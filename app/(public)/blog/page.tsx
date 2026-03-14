@@ -54,7 +54,7 @@ export default function BlogPage() {
             <div className="mt-10 flex items-center gap-4">
               {/* Circular avatar with initials */}
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold text-sm">
-                MK
+                RR
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-medium text-foreground">
@@ -164,7 +164,7 @@ export default function BlogPage() {
           {/* Author card at bottom */}
           <div className="flex items-start gap-4 rounded-xl border bg-muted/40 p-6">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
-              MK
+              RR
             </div>
             <div>
               <p className="font-semibold text-foreground"> Ravi Roy</p>
