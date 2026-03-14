@@ -7,6 +7,8 @@ import { AIGenerationService } from "@/lib/services/ai-generation";
 import { z } from "zod";
 import type { SummaryMode } from "@/lib/prompts/summary-prompt";
 
+export const runtime = "edge";
+
 const inputSchema = z.object({
   documentId: z.string().uuid(),
   summaryMode: z

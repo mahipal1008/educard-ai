@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/quiz/[id]/results/[attemptId]/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { QuizResults } from "@/components/quiz/QuizResults";

@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/settings/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

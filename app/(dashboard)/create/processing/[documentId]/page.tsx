@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/create/processing/[documentId]/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { ProcessingStatus } from "@/components/create/ProcessingStatus";

@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/deck/[id]/study/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useParams } from "next/navigation";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyMode } from "@/components/flashcards/StudyMode";

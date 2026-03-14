@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/dashboard/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect } from "react";
 import { StatsRow } from "@/components/dashboard/StatsRow";
 import { RecentDocuments } from "@/components/dashboard/RecentDocuments";

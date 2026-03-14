@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/diagram-generator/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";

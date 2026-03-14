@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { z } from "zod";
 
+export const runtime = "edge";
+
 const mergeSchema = z.object({
   deckIds: z.array(z.string().uuid()).min(2, "Select at least 2 decks to merge"),
   title: z.string().min(1).max(200),

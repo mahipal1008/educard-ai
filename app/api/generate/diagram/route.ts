@@ -5,6 +5,7 @@ import { nimChat } from "@/lib/nvidia-nim";
 import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
 
+export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 const diagramSchema = z.object({

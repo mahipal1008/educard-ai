@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/library/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { FileText, Youtube, Trash2, ExternalLink, Search, SlidersHorizontal } from "lucide-react";

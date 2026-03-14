@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/quiz/[id]/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useParams, useRouter } from "next/navigation";
 import { useQuiz } from "@/hooks/useQuiz";
 import { QuizProgress } from "@/components/quiz/QuizProgress";

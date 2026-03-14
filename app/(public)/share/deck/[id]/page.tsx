@@ -1,6 +1,8 @@
 // FILE: app/(public)/share/deck/[id]/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";

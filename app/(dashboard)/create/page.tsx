@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/create/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useSearchParams } from "next/navigation";
 import { InputTabs } from "@/components/create/InputTabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";

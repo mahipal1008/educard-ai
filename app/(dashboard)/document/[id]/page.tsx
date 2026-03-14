@@ -1,6 +1,8 @@
 // FILE: app/(dashboard)/document/[id]/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { DocumentHeader } from "@/components/document/DocumentHeader";

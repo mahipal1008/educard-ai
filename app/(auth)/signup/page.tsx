@@ -1,6 +1,8 @@
 // FILE: app/(auth)/signup/page.tsx
 "use client";
 
+export const runtime = "edge";
+
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClient } from "@/lib/supabase/client";
