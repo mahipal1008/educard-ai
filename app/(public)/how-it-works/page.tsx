@@ -42,7 +42,7 @@ const mainSteps = [
     number: "02",
     title: "AI processes & generates",
     description:
-      "Our AI powered by Google Gemini analyzes your content — transcribing videos, extracting text from PDFs, recognizing handwriting — then generates flashcards, quizzes, and summaries tailored to the material.",
+      "Our AI powered by NVIDIA NIM analyzes your content — transcribing videos, extracting text from PDFs, recognizing handwriting — then generates flashcards, quizzes, and summaries tailored to the material.",
     icon: Brain,
     color: "text-violet-500",
     bg: "bg-violet-500/10",

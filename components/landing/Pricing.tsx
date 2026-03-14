@@ -75,7 +75,7 @@ const faqs = [
   {
     question: "What AI models power EduCard AI?",
     answer:
-      "EduCard AI is powered by Google Gemini AI and other state-of-the-art language and vision models, along with ElevenLabs for voice synthesis. This allows us to deliver highly accurate flashcard generation, intelligent quiz creation, voice-based doubt solving, and image-based Q&A across 20+ languages.",
+      "EduCard AI is powered by NVIDIA NIM GPU-accelerated AI models (Llama 3.1 70B for text, Llama 3.2 90B for vision), along with ElevenLabs for voice synthesis. This allows us to deliver highly accurate flashcard generation, intelligent quiz creation, voice-based doubt solving, and image-based Q&A across 20+ languages.",
   },
 ];
 

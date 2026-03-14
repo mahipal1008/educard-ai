@@ -115,7 +115,7 @@ const companyInfo = [
   {
     icon: Layers,
     label: "Stack",
-    value: "Next.js, Gemini AI, PostgreSQL, Docker",
+    value: "Next.js, NVIDIA NIM, PostgreSQL, Cloudflare",
     color: "text-orange-500",
     bg: "bg-orange-500/10",
   },

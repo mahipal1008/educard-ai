@@ -100,14 +100,14 @@ export default function BlogPage() {
             </p>
 
             <h2 className="text-2xl font-semibold text-foreground mt-12 mb-4">
-              The AI Engine: Google Gemini at the Core
+              The AI Engine: NVIDIA NIM at the Core
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              We chose the <strong>Google Gemini API</strong> as our primary
-              language model. Gemini&apos;s multi-modal capabilities allow us to
+              We chose the <strong>NVIDIA NIM API</strong> as our primary
+              inference platform. NIM&apos;s GPU-accelerated models allow us to
               process both text and visual content from PDFs in a single
               inference call, dramatically reducing latency. For YouTube
-              content, we extract transcripts and feed them through Gemini with
+              content, we extract transcripts and feed them through Llama 3.1 70B with
               custom prompts engineered for educational content extraction. The
               model identifies key concepts, generates question-answer pairs,
               and produces concise summaries &mdash; all calibrated to the
@@ -139,7 +139,7 @@ export default function BlogPage() {
               natural, clear narration that makes audio review genuinely
               effective rather than robotic. On the input side, students can
               also dictate notes via voice, which our pipeline transcribes and
-              converts into structured study material through the same Gemini
+              converts into structured study material through the same NIM
               processing layer.
             </p>
 
@@ -150,7 +150,7 @@ export default function BlogPage() {
               The result is a seamless loop: upload or link your content, let
               GPU-accelerated AI break it down, review flashcards with spaced
               repetition, quiz yourself, and listen on the go. Every layer of
-              the stack &mdash; from Gemini&apos;s language understanding to
+              the stack &mdash; from NIM&apos;s language understanding to
               NVIDIA&apos;s compute power to ElevenLabs&apos; voice
               synthesis &mdash; is chosen to minimize friction between
               encountering information and actually retaining it. We believe

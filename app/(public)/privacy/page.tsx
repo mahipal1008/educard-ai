@@ -136,13 +136,13 @@ export default function PrivacyPolicyPage() {
                 </p>
                 <div className="space-y-4">
                   <div className="rounded-xl border bg-card p-5">
-                    <h3 className="font-semibold mb-1">Google Gemini AI</h3>
+                    <h3 className="font-semibold mb-1">NVIDIA NIM AI</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       We send your uploaded content (text extracted from PDFs
-                      and video transcripts) to Google&apos;s Gemini AI models
-                      to generate flashcards and summaries. Google&apos;s use
-                      of this data is governed by their own privacy policy and
-                      data processing terms.
+                      and video transcripts) to NVIDIA NIM GPU-accelerated AI
+                      models to generate flashcards and summaries. NVIDIA&apos;s
+                      use of this data is governed by their own privacy policy
+                      and data processing terms.
                     </p>
                   </div>
                   <div className="rounded-xl border bg-card p-5">
