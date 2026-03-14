@@ -16,7 +16,7 @@ export function CTABanner() {
           <div className="absolute top-10 left-10 h-32 w-32 bg-white/10 rounded-full blur-2xl" />
           <div className="absolute bottom-10 right-10 h-40 w-40 bg-white/10 rounded-full blur-2xl" />
 
-          <div className="relative px-8 py-16 md:px-16 md:py-20 lg:px-20 lg:py-24 text-center">
+          <div className="relative px-4 py-12 sm:px-8 sm:py-16 md:px-16 md:py-20 lg:px-20 lg:py-24 text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur px-4 py-1.5 text-sm lg:text-base font-medium text-white mb-8">
               <Sparkles className="h-4 w-4" />
               Start studying smarter today

@@ -7,8 +7,9 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CookieConsent } from "@/components/CookieConsent";
+import { ServiceWorkerRegistration } from "@/components/providers/sw-register";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -60,6 +61,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#7c3aed" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -76,6 +83,7 @@ export default function RootLayout({
             {children}
             <Toaster richColors position="bottom-right" />
             <CookieConsent />
+            <ServiceWorkerRegistration />
           </TooltipProvider>
         </ThemeProvider>
       </body>

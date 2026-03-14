@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTheme } from "next-themes";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,7 +33,7 @@ const diagramTypes: { id: DiagramType; label: string; icon: React.ElementType; d
   { id: "timeline", label: "Timeline", icon: Clock, description: "Chronological events" },
 ];
 
-function MermaidRenderer({ code, id }: { code: string; id: string }) {
+function MermaidRenderer({ code, id, currentTheme }: { code: string; id: string; currentTheme?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +43,7 @@ function MermaidRenderer({ code, id }: { code: string; id: string }) {
       const mermaid = (await import("mermaid")).default;
       mermaid.initialize({
         startOnLoad: false,
-        theme: "default",
+        theme: currentTheme === "dark" ? "dark" : "default",
         securityLevel: "loose",
         flowchart: { useMaxWidth: true, htmlLabels: true },
       });
@@ -53,7 +54,7 @@ function MermaidRenderer({ code, id }: { code: string; id: string }) {
       setError(e instanceof Error ? e.message : "Failed to render diagram");
       setSvg("");
     }
-  }, [code, id]);
+  }, [code, id, currentTheme]);
 
   useEffect(() => {
     renderDiagram();
@@ -62,7 +63,7 @@ function MermaidRenderer({ code, id }: { code: string; id: string }) {
   if (error) {
     return (
       <div className="space-y-3">
-        <div className="rounded-lg bg-amber-500/5 border border-amber-500/20 p-3 text-sm text-amber-600">
+        <div className="rounded-lg bg-amber-500/5 border border-amber-500/20 p-3 text-sm text-amber-600 dark:text-amber-400">
           Diagram rendering preview unavailable. You can copy the Mermaid code below and paste it into{" "}
           <a href="https://mermaid.live" target="_blank" rel="noopener noreferrer" className="underline font-medium">
             mermaid.live
@@ -79,13 +80,14 @@ function MermaidRenderer({ code, id }: { code: string; id: string }) {
   return (
     <div
       ref={containerRef}
-      className="flex justify-center overflow-x-auto rounded-lg bg-white p-4 border"
+      className="flex justify-center overflow-x-auto rounded-lg bg-background p-4 border"
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
 }
 
 export default function DiagramGeneratorPage() {
+  const { resolvedTheme } = useTheme();
   const [topic, setTopic] = useState("");
   const [diagramType, setDiagramType] = useState<DiagramType>("flowchart");
   const [generating, setGenerating] = useState(false);
@@ -237,7 +239,7 @@ export default function DiagramGeneratorPage() {
             </div>
           </CardHeader>
           <CardContent className="diagram-output">
-            <MermaidRenderer code={result.mermaidCode} id="main" />
+            <MermaidRenderer code={result.mermaidCode} id="main" currentTheme={resolvedTheme} />
           </CardContent>
         </Card>
       )}

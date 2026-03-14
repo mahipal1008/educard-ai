@@ -74,12 +74,12 @@ export function Hero() {
           {/* CTA buttons */}
           <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-in-up stagger-4">
             <Link href="/signup">
-              <Button size="lg" className="gap-2 text-base px-8 h-12 lg:h-14 lg:px-10 lg:text-lg glow-primary text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
+              <Button size="lg" className="gap-2 text-base px-8 h-12 lg:h-14 lg:px-10 lg:text-lg glow-primary shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
                 Get Started Free <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
             <Link href="#how-it-works">
-              <Button size="lg" variant="outline" className="gap-2 text-base px-8 h-12 lg:h-14 lg:px-10 lg:text-lg text-lg border-2 hover:bg-accent/50 transition-all">
+              <Button size="lg" variant="outline" className="gap-2 text-base px-8 h-12 lg:h-14 lg:px-10 lg:text-lg border-2 hover:bg-accent/50 transition-all">
                 <Play className="h-5 w-5" /> See How It Works
               </Button>
             </Link>
@@ -120,7 +120,7 @@ export function Hero() {
             <div className="hidden sm:block h-10 w-px bg-border" />
 
             {/* Stats */}
-            <div className="flex items-center gap-6 lg:gap-8 text-center">
+            <div className="flex items-center gap-3 sm:gap-6 lg:gap-8 text-center">
               <div>
                 <div className="text-lg lg:text-xl font-bold">10K+</div>
                 <div className="text-xs lg:text-sm text-muted-foreground">Flashcards Created</div>
@@ -160,16 +160,16 @@ export function Hero() {
                 {/* Stats row */}
                 <div className="grid gap-4 md:grid-cols-3 mb-6 lg:mb-8">
                   {[
-                    { icon: FileText, value: "24", label: "Flashcards Created", color: "primary", bg: "bg-primary/5 border-primary/10" },
-                    { icon: Brain, value: "85%", label: "Avg Quiz Score", color: "emerald-500", bg: "bg-emerald-500/5 border-emerald-500/10" },
-                    { icon: Sparkles, value: "7", label: "Day Streak", color: "orange-500", bg: "bg-orange-500/5 border-orange-500/10" },
+                    { icon: FileText, value: "24", label: "Flashcards Created", bg: "bg-primary/5 border-primary/10", iconBg: "bg-primary/10", iconColor: "text-primary", valueColor: "text-primary" },
+                    { icon: Brain, value: "85%", label: "Avg Quiz Score", bg: "bg-emerald-500/5 border-emerald-500/10", iconBg: "bg-emerald-500/10", iconColor: "text-emerald-500", valueColor: "text-emerald-500" },
+                    { icon: Sparkles, value: "7", label: "Day Streak", bg: "bg-orange-500/5 border-orange-500/10", iconBg: "bg-orange-500/10", iconColor: "text-orange-500", valueColor: "text-orange-500" },
                   ].map((stat) => (
                     <div key={stat.label} className={`rounded-xl ${stat.bg} border p-4 lg:p-5 flex items-center gap-3 lg:gap-4`}>
-                      <div className={`h-10 w-10 lg:h-12 lg:w-12 rounded-lg bg-${stat.color}/10 flex items-center justify-center`}>
-                        <stat.icon className={`h-5 w-5 lg:h-6 lg:w-6 text-${stat.color}`} />
+                      <div className={`h-10 w-10 lg:h-12 lg:w-12 rounded-lg ${stat.iconBg} flex items-center justify-center`}>
+                        <stat.icon className={`h-5 w-5 lg:h-6 lg:w-6 ${stat.iconColor}`} />
                       </div>
                       <div>
-                        <div className={`text-2xl lg:text-3xl font-bold text-${stat.color}`}>{stat.value}</div>
+                        <div className={`text-2xl lg:text-3xl font-bold ${stat.valueColor}`}>{stat.value}</div>
                         <div className="text-xs lg:text-sm text-muted-foreground">{stat.label}</div>
                       </div>
                     </div>

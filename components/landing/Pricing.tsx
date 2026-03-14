@@ -115,7 +115,7 @@ export function Pricing() {
                 )}
 
                 <div
-                  className={`h-full bg-card rounded-2xl border-2 p-8 lg:p-10 flex flex-col ${
+                  className={`h-full bg-card rounded-2xl border-2 p-5 sm:p-8 lg:p-10 flex flex-col ${
                     plan.popular
                       ? "border-primary/30 shadow-xl shadow-primary/10"
                       : "border-border"
@@ -144,7 +144,7 @@ export function Pricing() {
                       {plan.description}
                     </p>
                     <div className="mt-6 flex items-baseline gap-1">
-                      <span className="text-5xl lg:text-6xl font-extrabold">
+                      <span className="text-4xl sm:text-5xl lg:text-6xl font-extrabold">
                         {plan.price}
                       </span>
                       <span className="text-lg lg:text-xl text-muted-foreground">

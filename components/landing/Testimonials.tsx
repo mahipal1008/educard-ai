@@ -76,10 +76,10 @@ export function Testimonials() {
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="group rounded-2xl border bg-card p-6 lg:p-8 hover-lift hover:border-primary/20 transition-all duration-300 relative"
+              className="group rounded-2xl border bg-card p-6 lg:p-8 hover-lift hover:border-primary/20 dark:hover:border-primary/40 transition-all duration-300 relative"
             >
               {/* Quote icon */}
-              <Quote className="h-8 w-8 lg:h-10 lg:w-10 text-primary/10 mb-4" />
+              <Quote className="h-8 w-8 lg:h-10 lg:w-10 text-primary/10 dark:text-primary/20 mb-4" />
 
               {/* Stars */}
               <div className="flex items-center gap-0.5 mb-4">

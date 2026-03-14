@@ -70,8 +70,8 @@ export function HowItWorks() {
                   {/* Glow effect on hover */}
                   <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${step.accent} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`} />
 
-                  <div className={`relative flex h-28 w-28 lg:h-32 lg:w-32 items-center justify-center rounded-3xl ${step.bg} border-2 border-border group-hover:border-primary/30 transition-all duration-300`}>
-                    <step.icon className={`h-12 w-12 lg:h-14 lg:w-14 ${step.color}`} />
+                  <div className={`relative flex h-20 w-20 sm:h-28 sm:w-28 lg:h-32 lg:w-32 items-center justify-center rounded-3xl ${step.bg} border-2 border-border group-hover:border-primary/30 transition-all duration-300`}>
+                    <step.icon className={`h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 ${step.color}`} />
                   </div>
 
                   {/* Step badge */}

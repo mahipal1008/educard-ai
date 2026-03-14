@@ -1,7 +1,7 @@
 // FILE: components/quiz/QuizQuestion.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -23,6 +23,25 @@ export function QuizQuestion({
   disabled,
 }: QuizQuestionProps) {
   const [selected, setSelected] = useState<number | null>(null);
+
+  // Keyboard shortcuts: 1-4 or A-D to select answer
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (disabled || selected !== null) return;
+      const keyMap: Record<string, number> = { "1": 0, "2": 1, "3": 2, "4": 3, a: 0, b: 1, c: 2, d: 3 };
+      const index = keyMap[e.key.toLowerCase()];
+      if (index !== undefined && index < options.length) {
+        e.preventDefault();
+        handleSelect(index);
+      }
+    },
+    [disabled, selected, options.length] // eslint-disable-line react-hooks/exhaustive-deps
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   const handleSelect = (index: number) => {
     if (disabled || selected !== null) return;
@@ -62,7 +81,12 @@ export function QuizQuestion({
               >
                 {optionLetters[index]}
               </div>
-              <span className="text-sm font-medium">{option}</span>
+              <span className="text-sm font-medium flex-1">{option}</span>
+              {selected === null && !disabled && (
+                <kbd className="hidden sm:inline-flex text-[10px] text-muted-foreground/50 bg-muted px-1.5 py-0.5 rounded border font-mono">
+                  {index + 1}
+                </kbd>
+              )}
             </CardContent>
           </Card>
         ))}

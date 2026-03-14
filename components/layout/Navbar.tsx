@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { GraduationCap, Moon, Sun, LogOut, Settings, Zap, CreditCard } from "lucide-react";
+import { GraduationCap, Moon, Sun, LogOut, Settings, Zap, CreditCard, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,6 +15,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -30,6 +31,7 @@ export function Navbar({ showAuth = false }: NavbarProps) {
   const supabase = createClient();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -105,6 +107,45 @@ export function Navbar({ showAuth = false }: NavbarProps) {
         )}
 
         <div className="flex items-center gap-1.5">
+          {/* Mobile menu (public/landing only) */}
+          {!showAuth && (
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger
+                render={<Button variant="ghost" size="icon" className="h-8 w-8 md:hidden" />}
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Open menu</span>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-64 pt-10">
+                <nav className="flex flex-col gap-1">
+                  {[
+                    { href: "/#features", label: "Features" },
+                    { href: "/#how-it-works", label: "How It Works" },
+                    { href: "/#pricing", label: "Pricing" },
+                    { href: "/about", label: "About" },
+                    { href: "/blog", label: "Blog" },
+                  ].map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <div className="border-t my-3" />
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full">Sign in</Button>
+                  </Link>
+                  <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                    <Button className="w-full">Get Started</Button>
+                  </Link>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          )}
+
           {/* Credits indicator for free plan */}
           {showAuth && profile && creditsRemaining !== null && (
             <Tooltip>

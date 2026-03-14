@@ -98,7 +98,7 @@ export function Features() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className={`group relative overflow-hidden rounded-2xl border-2 bg-card p-8 lg:p-10 transition-all duration-300 hover-lift ${feature.borderHover}`}
+              className={`group relative overflow-hidden rounded-2xl border-2 bg-card p-5 sm:p-8 lg:p-10 transition-all duration-300 hover-lift ${feature.borderHover}`}
             >
               {/* Gradient background on hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
