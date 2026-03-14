@@ -5,16 +5,27 @@ import type { FlashcardGeneration, QuizQuestionGeneration } from "@/types";
 import {
   getFlashcardPrompt,
   getFlashcardSystemPrompt,
+  type FlashcardPreferences,
 } from "@/lib/prompts/flashcard-prompt";
 import {
   getQuizPrompt,
   getQuizSystemPrompt,
+  type QuizPreferences,
 } from "@/lib/prompts/quiz-prompt";
 import {
   getSummaryPrompt,
   getSummarySystemPrompt,
   type SummaryMode,
+  type SummaryPreferences,
 } from "@/lib/prompts/summary-prompt";
+
+export interface AIPreferences {
+  difficulty?: "easy" | "medium" | "hard" | "adaptive";
+  cardDensity?: "fewer" | "standard" | "more";
+  summaryMode?: SummaryMode;
+  quizStyle?: "conceptual" | "factual" | "application" | "mixed";
+  focusAreas?: string;
+}
 
 const MAX_RETRIES = 3;
 const RETRY_BASE_DELAY = 1000;
@@ -34,11 +45,18 @@ export class AIGenerationService {
    * Returns an array of { front, back } objects.
    */
   static async generateFlashcards(
-    text: string
+    text: string,
+    prefs?: AIPreferences
   ): Promise<FlashcardGeneration[]> {
+    const flashcardPrefs: FlashcardPreferences = {
+      difficulty: prefs?.difficulty,
+      cardDensity: prefs?.cardDensity,
+      focusAreas: prefs?.focusAreas,
+    };
+
     const response = await this.callGemini(
       getFlashcardSystemPrompt(),
-      getFlashcardPrompt(text)
+      getFlashcardPrompt(text, flashcardPrefs)
     );
 
     const parsed = this.parseJSON<FlashcardGeneration[]>(response);
@@ -62,11 +80,18 @@ export class AIGenerationService {
    * Returns an array of quiz question objects.
    */
   static async generateQuiz(
-    text: string
+    text: string,
+    prefs?: AIPreferences
   ): Promise<QuizQuestionGeneration[]> {
+    const quizPrefs: QuizPreferences = {
+      difficulty: prefs?.difficulty,
+      quizStyle: prefs?.quizStyle,
+      focusAreas: prefs?.focusAreas,
+    };
+
     const response = await this.callGemini(
       getQuizSystemPrompt(),
-      getQuizPrompt(text)
+      getQuizPrompt(text, quizPrefs)
     );
 
     const parsed = this.parseJSON<QuizQuestionGeneration[]>(response);
@@ -91,10 +116,19 @@ export class AIGenerationService {
   /**
    * Generate a markdown summary from text content.
    */
-  static async generateSummary(text: string, mode: SummaryMode = "default"): Promise<string> {
+  static async generateSummary(
+    text: string,
+    mode: SummaryMode = "default",
+    prefs?: AIPreferences
+  ): Promise<string> {
+    const summaryPrefs: SummaryPreferences = {
+      difficulty: prefs?.difficulty,
+      focusAreas: prefs?.focusAreas,
+    };
+
     const response = await this.callGemini(
       getSummarySystemPrompt(),
-      getSummaryPrompt(text, mode)
+      getSummaryPrompt(text, mode, summaryPrefs)
     );
 
     if (!response || response.trim().length === 0) {

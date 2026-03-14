@@ -54,6 +54,16 @@ export function useUpload() {
       const formData = new FormData();
       formData.append("file", file);
 
+      // Attach AI preferences from localStorage
+      try {
+        const savedPrefs = localStorage.getItem("educard-ai-prefs");
+        if (savedPrefs) {
+          formData.append("aiPrefs", savedPrefs);
+        }
+      } catch {
+        // Ignore localStorage errors
+      }
+
       // Simulate progress since fetch doesn't support progress natively
       const progressInterval = setInterval(() => {
         setUploadProgress((prev) => {

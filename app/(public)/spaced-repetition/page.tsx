@@ -1,4 +1,5 @@
 // FILE: app/(public)/spaced-repetition/page.tsx
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -65,6 +66,11 @@ const benefits = [
       "Never miss a review. Your dashboard shows exactly how many cards are due today, keeping your streak alive.",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Spaced Repetition",
+  description: "Master any subject with AI-powered spaced repetition. EduCard AI schedules reviews at optimal intervals for long-term retention.",
+};
 
 export default function SpacedRepetitionPage() {
   return (

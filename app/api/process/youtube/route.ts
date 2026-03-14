@@ -24,6 +24,7 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     const validation = youtubeUrlSchema.safeParse(body);
+    const aiPrefs = body.aiPrefs;
 
     if (!validation.success) {
       return NextResponse.json(
@@ -71,7 +72,7 @@ export async function POST(request: Request) {
     const doc = document as any;
 
     // Process in background (non-blocking)
-    processYouTube(doc.id, validation.data.url, user.id).catch((err) => {
+    processYouTube(doc.id, validation.data.url, user.id, aiPrefs).catch((err) => {
       console.error("YouTube processing error:", err);
     });
 
@@ -93,7 +94,8 @@ export async function POST(request: Request) {
 async function processYouTube(
   documentId: string,
   url: string,
-  userId: string
+  userId: string,
+  aiPrefs?: Record<string, unknown>
 ) {
   const admin = createAdminClient();
 
@@ -118,17 +120,17 @@ async function processYouTube(
       fetch(`${appUrl}/api/generate/summary`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId, userId }),
+        body: JSON.stringify({ documentId, userId, summaryMode: aiPrefs?.summaryMode, aiPrefs }),
       }),
       fetch(`${appUrl}/api/generate/flashcards`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId, userId }),
+        body: JSON.stringify({ documentId, userId, aiPrefs }),
       }),
       fetch(`${appUrl}/api/generate/quiz`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId, userId }),
+        body: JSON.stringify({ documentId, userId, aiPrefs }),
       }),
     ];
 

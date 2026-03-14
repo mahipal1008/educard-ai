@@ -25,6 +25,8 @@ export async function POST(request: Request) {
 
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
+    const aiPrefsRaw = formData.get("aiPrefs") as string | null;
+    const aiPrefs = aiPrefsRaw ? JSON.parse(aiPrefsRaw) : undefined;
 
     if (!file) {
       return NextResponse.json(
@@ -86,7 +88,7 @@ export async function POST(request: Request) {
     const arrayBuffer = await file.arrayBuffer();
 
     // Process in background (non-blocking)
-    processPDF(doc.id, arrayBuffer, file.name, user.id).catch((err) => {
+    processPDF(doc.id, arrayBuffer, file.name, user.id, aiPrefs).catch((err) => {
       console.error("PDF processing error:", err);
     });
 
@@ -109,7 +111,8 @@ async function processPDF(
   documentId: string,
   data: ArrayBuffer,
   filename: string,
-  userId: string
+  userId: string,
+  aiPrefs?: Record<string, unknown>
 ) {
   const admin = createAdminClient();
 
@@ -147,17 +150,17 @@ async function processPDF(
       fetch(`${appUrl}/api/generate/summary`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId, userId }),
+        body: JSON.stringify({ documentId, userId, summaryMode: aiPrefs?.summaryMode, aiPrefs }),
       }),
       fetch(`${appUrl}/api/generate/flashcards`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId, userId }),
+        body: JSON.stringify({ documentId, userId, aiPrefs }),
       }),
       fetch(`${appUrl}/api/generate/quiz`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId, userId }),
+        body: JSON.stringify({ documentId, userId, aiPrefs }),
       }),
     ];
 

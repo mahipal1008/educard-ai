@@ -31,10 +31,19 @@ export function YouTubeInput() {
   const onSubmit = async (data: YouTubeUrlInput) => {
     setSubmitting(true);
     try {
+      // Read AI preferences from localStorage
+      let aiPrefs;
+      try {
+        const savedPrefs = localStorage.getItem("educard-ai-prefs");
+        if (savedPrefs) aiPrefs = JSON.parse(savedPrefs);
+      } catch {
+        // Ignore localStorage errors
+      }
+
       const res = await fetch("/api/process/youtube", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, aiPrefs }),
       });
       const json = await res.json();
 

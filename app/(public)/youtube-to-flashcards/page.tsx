@@ -1,4 +1,5 @@
 // FILE: app/(public)/youtube-to-flashcards/page.tsx
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -57,6 +58,11 @@ const benefits = [
   "Supports 20+ languages via translation",
   "No manual note-taking needed",
 ];
+
+export const metadata: Metadata = {
+  title: "YouTube to Flashcards",
+  description: "Turn any YouTube video into study flashcards with AI. Paste a URL and get instant flashcards, quizzes, and summaries.",
+};
 
 export default function YouTubeToFlashcardsPage() {
   return (

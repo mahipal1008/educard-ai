@@ -36,29 +36,29 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24 md:py-32 bg-muted/30 relative overflow-hidden" id="how-it-works">
+    <section className="py-24 md:py-32 lg:py-40 bg-muted/30 relative overflow-hidden" id="how-it-works">
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      <div className="mx-auto max-w-7xl px-4 md:px-6 relative">
-        <div className="text-center mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 rounded-full border bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary mb-6">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8 relative">
+        <div className="text-center mb-16 md:mb-20 lg:mb-24">
+          <div className="inline-flex items-center gap-2 rounded-full border bg-primary/5 px-4 py-1.5 text-sm lg:text-base font-medium text-primary mb-6">
             <Cpu className="h-4 w-4" />
             How It Works
           </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
             Three steps to{" "}
             <span className="gradient-text">smarter studying</span>
           </h2>
-          <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-5 text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
             From content to study session in under 60 seconds.
           </p>
         </div>
 
-        <div className="grid gap-8 lg:gap-6 md:grid-cols-3 relative">
+        <div className="grid gap-8 lg:gap-10 md:grid-cols-3 relative">
           {/* Connector lines (desktop) */}
-          <div className="absolute top-20 left-[calc(33.33%)] right-[calc(33.33%)] h-0.5 hidden md:flex items-center justify-center">
+          <div className="absolute top-20 lg:top-24 left-[calc(33.33%)] right-[calc(33.33%)] h-0.5 hidden md:flex items-center justify-center">
             <div className="w-full border-t-2 border-dashed border-primary/20" />
           </div>
 
@@ -70,18 +70,18 @@ export function HowItWorks() {
                   {/* Glow effect on hover */}
                   <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${step.accent} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`} />
 
-                  <div className={`relative flex h-28 w-28 items-center justify-center rounded-3xl ${step.bg} border-2 border-border group-hover:border-primary/30 transition-all duration-300`}>
-                    <step.icon className={`h-12 w-12 ${step.color}`} />
+                  <div className={`relative flex h-28 w-28 lg:h-32 lg:w-32 items-center justify-center rounded-3xl ${step.bg} border-2 border-border group-hover:border-primary/30 transition-all duration-300`}>
+                    <step.icon className={`h-12 w-12 lg:h-14 lg:w-14 ${step.color}`} />
                   </div>
 
                   {/* Step badge */}
-                  <div className={`absolute -top-3 -right-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${step.accent} text-white text-sm font-bold shadow-lg`}>
+                  <div className={`absolute -top-3 -right-3 flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br ${step.accent} text-white text-sm lg:text-base font-bold shadow-lg`}>
                     {step.step}
                   </div>
                 </div>
 
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground max-w-xs leading-relaxed">
+                <h3 className="text-xl lg:text-2xl font-bold mb-3">{step.title}</h3>
+                <p className="text-muted-foreground lg:text-lg max-w-xs leading-relaxed">
                   {step.description}
                 </p>
               </div>

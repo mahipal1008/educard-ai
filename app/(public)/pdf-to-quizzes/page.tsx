@@ -1,4 +1,5 @@
 // FILE: app/(public)/pdf-to-quizzes/page.tsx
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -57,6 +58,11 @@ const features = [
   "Generates flashcards alongside quizzes",
   "Works with textbooks, notes, and papers",
 ];
+
+export const metadata: Metadata = {
+  title: "PDF to Quizzes",
+  description: "Convert any PDF into AI-generated quizzes instantly. Upload lecture notes, textbooks, or research papers and test your knowledge.",
+};
 
 export default function PdfToQuizzesPage() {
   return (

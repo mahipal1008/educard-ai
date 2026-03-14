@@ -1,4 +1,5 @@
 // FILE: app/(public)/how-it-works/page.tsx
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,11 @@ const mainSteps = [
     ],
   },
 ];
+
+export const metadata: Metadata = {
+  title: "How It Works",
+  description: "See how EduCard AI works in 3 simple steps: upload your content, let AI generate study materials, and start studying with flashcards and quizzes.",
+};
 
 export default function HowItWorksPage() {
   return (

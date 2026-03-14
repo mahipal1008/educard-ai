@@ -13,6 +13,10 @@ const inputSchema = z.object({
     .enum(["default", "bullet", "cornell", "outline", "mindmap"])
     .optional()
     .default("default"),
+  aiPrefs: z.object({
+    difficulty: z.enum(["easy", "medium", "hard", "adaptive"]).optional(),
+    focusAreas: z.string().optional(),
+  }).optional(),
 });
 
 export const dynamic = "force-dynamic";
@@ -36,7 +40,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { documentId, summaryMode } = validation.data;
+    const { documentId, summaryMode, aiPrefs } = validation.data;
     const admin = createAdminClient();
 
     // Verify the document belongs to this user
@@ -70,7 +74,8 @@ export async function POST(request: Request) {
     // Generate summary with the specified mode
     const summary = await AIGenerationService.generateSummary(
       document.transcript_text,
-      summaryMode as SummaryMode
+      summaryMode as SummaryMode,
+      aiPrefs
     );
 
     // Update document with summary

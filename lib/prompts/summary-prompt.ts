@@ -2,11 +2,16 @@
 
 export type SummaryMode = "default" | "bullet" | "cornell" | "outline" | "mindmap";
 
+export interface SummaryPreferences {
+  difficulty?: "easy" | "medium" | "hard" | "adaptive";
+  focusAreas?: string;
+}
+
 export function getSummarySystemPrompt(): string {
   return `You are an expert at summarizing educational content clearly and concisely. You create well-structured summaries that help students quickly understand the key points and concepts. Respond in Markdown format.`;
 }
 
-export function getSummaryPrompt(text: string, mode: SummaryMode = "default"): string {
+export function getSummaryPrompt(text: string, mode: SummaryMode = "default", prefs?: SummaryPreferences): string {
   const modeInstructions: Record<SummaryMode, string> = {
     default: `Include the following sections:
 
@@ -81,9 +86,21 @@ List 3-5 connections between branches:
 - [Branch X] connects to [Branch Y] because...`,
   };
 
+  let extraInstructions = "";
+
+  if (prefs?.difficulty === "easy") {
+    extraInstructions += "\nUse simple language and avoid jargon. Explain technical terms when used.";
+  } else if (prefs?.difficulty === "hard") {
+    extraInstructions += "\nInclude advanced details, nuances, and connections between concepts.";
+  }
+
+  if (prefs?.focusAreas && prefs.focusAreas.trim()) {
+    extraInstructions += `\nPay special attention to these topics/areas: ${prefs.focusAreas}`;
+  }
+
   return `Summarize the following educational content using the specified format.
 
-${modeInstructions[mode]}
+${modeInstructions[mode]}${extraInstructions}
 
 Content:
 ${text}`;

@@ -71,13 +71,13 @@ export function Navbar({ showAuth = false }: NavbarProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-14 items-center justify-between px-4 md:px-6">
+      <div className="mx-auto max-w-[1400px] flex h-14 lg:h-16 items-center justify-between px-4 md:px-8">
         <div className="flex items-center gap-2">
           <Link href={showAuth ? "/dashboard" : "/"} className="flex items-center gap-2 group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:scale-105">
+            <div className="flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:scale-105">
               <GraduationCap className="h-5 w-5" />
             </div>
-            <span className="text-lg font-bold hidden sm:inline">
+            <span className="text-lg lg:text-xl font-bold hidden sm:inline">
               EduCard <span className="text-primary">AI</span>
             </span>
           </Link>
@@ -85,21 +85,21 @@ export function Navbar({ showAuth = false }: NavbarProps) {
 
         {/* Center nav links (public/landing only) */}
         {!showAuth && (
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
             <Link href="/#features">
-              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">Features</Button>
+              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">Features</Button>
             </Link>
             <Link href="/#how-it-works">
-              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">How It Works</Button>
+              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">How It Works</Button>
             </Link>
             <Link href="/#pricing">
-              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">Pricing</Button>
+              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">Pricing</Button>
             </Link>
             <Link href="/about">
-              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">About</Button>
+              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">About</Button>
             </Link>
             <Link href="/blog">
-              <Button variant="ghost" size="sm" className="h-8 text-sm text-muted-foreground hover:text-foreground">Blog</Button>
+              <Button variant="ghost" size="sm" className="h-8 text-sm lg:text-base text-muted-foreground hover:text-foreground">Blog</Button>
             </Link>
           </nav>
         )}

@@ -1,6 +1,12 @@
 // FILE: app/(public)/privacy/page.tsx
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Learn how EduCard AI collects, uses, and protects your personal data. Read our full privacy policy.",
+};
 
 export default function PrivacyPolicyPage() {
   return (

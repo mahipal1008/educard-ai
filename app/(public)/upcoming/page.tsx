@@ -1,4 +1,5 @@
 // FILE: app/(public)/upcoming/page.tsx
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -127,6 +128,11 @@ const upcomingFeatures = [
 const statusColors: Record<string, string> = {
   "In Development": "bg-blue-500/10 text-blue-500 border-blue-500/20",
   "Research Phase": "bg-purple-500/10 text-purple-500 border-purple-500/20",
+};
+
+export const metadata: Metadata = {
+  title: "Upcoming Features",
+  description: "See what's coming next to EduCard AI: collaborative study, advanced analytics, mobile app, and more AI-powered learning tools.",
 };
 
 export default function UpcomingPage() {

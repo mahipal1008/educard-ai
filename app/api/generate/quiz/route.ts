@@ -7,9 +7,16 @@ import { ChunkingService } from "@/lib/services/chunking";
 import { z } from "zod";
 import type { QuizQuestionGeneration } from "@/types";
 
+const prefsSchema = z.object({
+  difficulty: z.enum(["easy", "medium", "hard", "adaptive"]).optional(),
+  quizStyle: z.enum(["conceptual", "factual", "application", "mixed"]).optional(),
+  focusAreas: z.string().optional(),
+});
+
 const inputSchema = z.object({
   documentId: z.string().uuid(),
   userId: z.string().uuid(),
+  aiPrefs: prefsSchema.optional(),
 });
 
 export const runtime = "edge";
@@ -26,7 +33,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { documentId, userId } = validation.data;
+    const { documentId, userId, aiPrefs } = validation.data;
     const admin = createAdminClient();
 
     // Fetch transcript text and document title
@@ -50,7 +57,7 @@ export async function POST(request: Request) {
     let allQuestions: QuizQuestionGeneration[] = [];
 
     for (const chunk of chunks) {
-      const questions = await AIGenerationService.generateQuiz(chunk);
+      const questions = await AIGenerationService.generateQuiz(chunk, aiPrefs);
       allQuestions = [...allQuestions, ...questions];
     }
 

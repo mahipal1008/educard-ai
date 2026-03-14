@@ -42,10 +42,19 @@ export function SummaryCard({ summary, documentId }: SummaryCardProps) {
     if (!documentId) return;
     setRegenerating(true);
     try {
+      // Read AI preferences from localStorage
+      let aiPrefs;
+      try {
+        const savedPrefs = localStorage.getItem("educard-ai-prefs");
+        if (savedPrefs) aiPrefs = JSON.parse(savedPrefs);
+      } catch {
+        // Ignore localStorage errors
+      }
+
       const res = await fetch("/api/generate/summary", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId, summaryMode: mode }),
+        body: JSON.stringify({ documentId, summaryMode: mode, aiPrefs }),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error);

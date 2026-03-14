@@ -81,25 +81,25 @@ const faqs = [
 
 export function Pricing() {
   return (
-    <section className="py-24 md:py-32 relative" id="pricing">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
+    <section className="py-24 md:py-32 lg:py-40 relative" id="pricing">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8">
         {/* Section header */}
-        <div className="text-center mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 rounded-full border bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary mb-6">
+        <div className="text-center mb-16 md:mb-20 lg:mb-24">
+          <div className="inline-flex items-center gap-2 rounded-full border bg-primary/5 px-4 py-1.5 text-sm lg:text-base font-medium text-primary mb-6">
             <Sparkles className="h-4 w-4" />
             Pricing
           </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
             Simple, transparent{" "}
             <span className="gradient-text">pricing</span>
           </h2>
-          <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-5 text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
             Start free. Upgrade when you need more power. No hidden fees.
           </p>
         </div>
 
         {/* Pricing cards */}
-        <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto items-start">
+        <div className="grid gap-8 md:grid-cols-3 max-w-[1200px] mx-auto items-start">
           {plans.map((plan) => {
             const Icon = plan.icon;
             return (
@@ -115,7 +115,7 @@ export function Pricing() {
                 )}
 
                 <div
-                  className={`h-full bg-card rounded-2xl border-2 p-8 flex flex-col ${
+                  className={`h-full bg-card rounded-2xl border-2 p-8 lg:p-10 flex flex-col ${
                     plan.popular
                       ? "border-primary/30 shadow-xl shadow-primary/10"
                       : "border-border"
@@ -125,29 +125,29 @@ export function Pricing() {
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-3">
                       <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-xl ${
+                        className={`flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-xl ${
                           plan.popular
                             ? "bg-primary/10 text-primary"
                             : "bg-muted text-muted-foreground"
                         }`}
                       >
-                        <Icon className="h-5 w-5" />
+                        <Icon className="h-5 w-5 lg:h-6 lg:w-6" />
                       </div>
-                      <h3 className="text-2xl font-bold">{plan.name}</h3>
+                      <h3 className="text-2xl lg:text-3xl font-bold">{plan.name}</h3>
                       {plan.popular && (
                         <Badge className="bg-primary text-primary-foreground gap-1">
                           <Zap className="h-3 w-3" /> Most Popular
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm lg:text-base text-muted-foreground">
                       {plan.description}
                     </p>
                     <div className="mt-6 flex items-baseline gap-1">
-                      <span className="text-5xl font-extrabold">
+                      <span className="text-5xl lg:text-6xl font-extrabold">
                         {plan.price}
                       </span>
-                      <span className="text-lg text-muted-foreground">
+                      <span className="text-lg lg:text-xl text-muted-foreground">
                         {plan.period}
                       </span>
                     </div>
@@ -158,10 +158,10 @@ export function Pricing() {
                     {plan.features.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-center gap-3 text-sm"
+                        className="flex items-center gap-3 text-sm lg:text-base"
                       >
-                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10">
-                          <Check className="h-3.5 w-3.5 text-emerald-500" />
+                        <div className="flex h-5 w-5 lg:h-6 lg:w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/10">
+                          <Check className="h-3.5 w-3.5 lg:h-4 lg:w-4 text-emerald-500" />
                         </div>
                         <span className="font-medium">{feature}</span>
                       </li>
@@ -171,7 +171,7 @@ export function Pricing() {
                   {/* CTA */}
                   <Link href={plan.name === "Enterprise" ? "/contact" : "/signup"}>
                     <Button
-                      className={`w-full h-12 text-base font-semibold ${
+                      className={`w-full h-12 lg:h-14 text-base lg:text-lg font-semibold ${
                         plan.popular
                           ? "glow-primary shadow-lg shadow-primary/20"
                           : ""
