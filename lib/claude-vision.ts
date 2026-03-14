@@ -1,7 +1,7 @@
 // FILE: lib/claude-vision.ts
-// NOTE: Now uses Google Gemini instead of Claude for vision tasks
+// NOTE: Now uses NVIDIA NIM API instead of Google Gemini for vision tasks
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { nimChat, nimVision } from "@/lib/nvidia-nim";
 
 type MediaType = "image/jpeg" | "image/png" | "image/webp" | "image/gif";
 
@@ -17,18 +17,6 @@ interface ImageQAResult {
 interface OCRResult {
   extractedText: string;
   topics: string[];
-}
-
-const MAX_RETRIES = 3;
-const RETRY_BASE_DELAY = 1000;
-
-let genAI: GoogleGenerativeAI | null = null;
-
-function getGenAI(): GoogleGenerativeAI {
-  if (!genAI) {
-    genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-  }
-  return genAI;
 }
 
 function parseJSON<T>(text: string): T {
@@ -52,58 +40,6 @@ function parseJSON<T>(text: string): T {
   }
 }
 
-async function callGeminiVision(
-  base64Image: string,
-  mimeType: MediaType,
-  textPrompt: string,
-): Promise<string> {
-  const ai = getGenAI();
-  const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-    try {
-      const result = await model.generateContent([
-        textPrompt,
-        {
-          inlineData: {
-            data: base64Image,
-            mimeType,
-          },
-        },
-      ]);
-
-      const text = result.response.text();
-      if (!text) {
-        throw new Error("No text content in AI vision response.");
-      }
-      return text;
-    } catch (error) {
-      const isRateLimit =
-        error instanceof Error &&
-        (error.message.includes("429") ||
-          error.message.includes("RATE_LIMIT") ||
-          error.message.includes("quota"));
-      const isLastAttempt = attempt === MAX_RETRIES - 1;
-
-      if (isRateLimit && !isLastAttempt) {
-        const delay = RETRY_BASE_DELAY * Math.pow(2, attempt);
-        await new Promise((resolve) => setTimeout(resolve, delay));
-        continue;
-      }
-
-      if (isLastAttempt) {
-        throw new Error(
-          `AI vision failed after ${MAX_RETRIES} attempts: ${
-            error instanceof Error ? error.message : "Unknown error"
-          }`
-        );
-      }
-      throw error;
-    }
-  }
-  throw new Error("AI vision failed: exhausted all retries.");
-}
-
 export async function analyzeImageForQA(
   base64Image: string,
   mimeType: MediaType
@@ -120,7 +56,12 @@ Respond ONLY in this JSON format, no markdown, no explanation:
   ]
 }`;
 
-  const response = await callGeminiVision(base64Image, mimeType, prompt);
+  const response = await nimVision(
+    "You are an expert image analyst. Always return valid JSON.",
+    prompt,
+    base64Image,
+    mimeType
+  );
   return parseJSON<ImageQAResult>(response);
 }
 
@@ -140,28 +81,30 @@ Return ONLY valid JSON in this format, no markdown, no explanation:
   "topics": ["Topic 1", "Topic 2"]
 }`;
 
-  const response = await callGeminiVision(base64Image, mimeType, prompt);
+  const response = await nimVision(
+    "You are an expert OCR and handwriting analyst. Always return valid JSON.",
+    prompt,
+    base64Image,
+    mimeType
+  );
   return parseJSON<OCRResult>(response);
 }
 
 export async function generateDiagramForConcept(
   question: string
 ): Promise<string | null> {
-  const ai = getGenAI();
-  const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-  const result = await model.generateContent(
+  const response = await nimChat(
+    "You are a helpful educational assistant. Return ONLY valid JSON.",
     `For this concept: "${question}"
 If a simple visual breakdown would help, generate it as an ASCII diagram or structured list.
 If not applicable (e.g. factual question), return null.
 Return ONLY JSON: {"diagram": "..." | null}`
   );
 
-  const text = result.response.text();
-  if (!text) return null;
+  if (!response) return null;
 
   try {
-    const parsed = parseJSON<{ diagram: string | null }>(text);
+    const parsed = parseJSON<{ diagram: string | null }>(response);
     return parsed.diagram;
   } catch {
     return null;

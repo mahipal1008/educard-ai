@@ -1,7 +1,7 @@
 // FILE: app/api/generate/diagram/route.ts
 
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { nimChat } from "@/lib/nvidia-nim";
 import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
 
@@ -11,12 +11,6 @@ const diagramSchema = z.object({
   topic: z.string().min(1).max(500),
   diagramType: z.enum(["flowchart", "mindmap", "sequence", "classDiagram", "timeline"]),
 });
-
-let genAI: GoogleGenerativeAI | null = null;
-function getGenAI(): GoogleGenerativeAI {
-  if (!genAI) genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-  return genAI;
-}
 
 const diagramPrompts: Record<string, string> = {
   flowchart: `Generate a Mermaid.js FLOWCHART diagram for the topic.
@@ -88,8 +82,6 @@ export async function POST(request: Request) {
     }
 
     const { topic, diagramType } = validation.data;
-    const ai = getGenAI();
-    const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const prompt = `${diagramPrompts[diagramType]}
 
@@ -103,19 +95,21 @@ IMPORTANT RULES:
 - Use clear, educational labels
 - Make the diagram comprehensive but readable`;
 
-    const result = await model.generateContent(prompt);
-    let mermaidCode = result.response.text().trim();
+    let mermaidCode = await nimChat(
+      "You are an expert at generating valid Mermaid.js diagram code. Return ONLY raw Mermaid code, no markdown.",
+      prompt
+    );
 
     // Strip markdown code blocks if present
     if (mermaidCode.startsWith("```")) {
       mermaidCode = mermaidCode.replace(/^```(?:mermaid)?\s*\n?/, "").replace(/\n?```$/, "").trim();
     }
 
-    // Also ask Gemini for a text summary of the diagram
-    const summaryResult = await model.generateContent(
+    // Also ask NIM for a text summary of the diagram
+    const summary = await nimChat(
+      "You are a concise educational assistant.",
       `In 2-3 sentences, explain what this diagram shows about "${topic}". Be concise and educational.`
     );
-    const summary = summaryResult.response.text().trim();
 
     return NextResponse.json({
       data: {

@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { generateDiagramForConcept } from "@/lib/claude-vision";
 import { textToSpeech } from "@/lib/elevenlabs";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { nimChat } from "@/lib/nvidia-nim";
 import { z } from "zod";
 
 const inputSchema = z.object({
@@ -37,16 +37,11 @@ export async function POST(request: Request) {
 
     const { question } = validation.data;
 
-    // Step 1: Answer with Gemini
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
-      systemInstruction:
-        "You are a helpful tutor. Answer student questions concisely in 3-5 sentences. If the question involves math or science, give a clear explanation with an example.",
-    });
-
-    const result = await model.generateContent(question);
-    const answerText = result.response.text() || "";
+    // Step 1: Answer with NVIDIA NIM
+    const answerText = await nimChat(
+      "You are a helpful tutor. Answer student questions concisely in 3-5 sentences. If the question involves math or science, give a clear explanation with an example.",
+      question
+    );
 
     // Step 2: Generate diagram if applicable (best-effort)
     let diagram: string | null = null;

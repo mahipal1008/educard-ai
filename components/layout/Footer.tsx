@@ -72,14 +72,30 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 lg:mt-16 pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm lg:text-base text-muted-foreground">
-            &copy; {new Date().getFullYear()} EduCard AI. All rights reserved.
-          </p>
-          <p className="text-xs text-muted-foreground/60">
-            Made with AI — Built for students, by students.
-          </p>
+        {/* NVIDIA NIM Badge */}
+        <div className="mt-12 lg:mt-16 pt-8 border-t flex flex-col items-center gap-6">
+          <a
+            href="https://build.nvidia.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-lg border border-[#76B900]/30 bg-[#76B900]/5 px-5 py-3 transition-colors hover:border-[#76B900]/60 hover:bg-[#76B900]/10"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#76B900" className="h-6 w-6">
+              <path d="M8.948 8.798V6.852c.072-.005.144-.009.218-.009 2.805-.084 4.953 2.395 4.953 2.395s-2.29 2.72-4.726 2.72c-.16 0-.312-.013-.445-.038V9.463c1.528.18 2.468-.859 3.157-1.625L8.948 8.798zM8.948 4.417v1.964l.218-.012c3.68-.109 6.468 3.122 6.468 3.122s-3.193 3.502-6.249 3.502c-.16 0-.308-.007-.437-.018v1.16c.12.007.244.014.38.014 2.932 0 5.056-1.493 7.096-3.268.339.278 1.73 1.312 2.016 1.535-1.988 1.6-6.612 3.085-9.056 3.085-.152 0-.296-.005-.436-.016v1.404H20.5V4.417H8.948zM8.948 12.971v-1.179a3.897 3.897 0 0 1-.445.032c-2.08 0-3.555-1.804-3.555-1.804s1.714-1.956 3.782-2.147V6.852C5.844 7.104 3.5 9.586 3.5 9.586s1.452 3.706 5.003 3.706c.16 0 .308-.012.445-.032v-.289z"/>
+            </svg>
+            <span className="text-sm font-medium text-[#76B900]">
+              Powered by NVIDIA NIM
+            </span>
+          </a>
+
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
+            <p className="text-sm lg:text-base text-muted-foreground">
+              &copy; {new Date().getFullYear()} EduCard AI. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground/60">
+              Made with AI — Built for students, by students.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

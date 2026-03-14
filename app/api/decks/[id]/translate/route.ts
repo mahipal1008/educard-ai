@@ -2,7 +2,7 @@
 
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { nimChat } from "@/lib/nvidia-nim";
 import { z } from "zod";
 
 const inputSchema = z.object({
@@ -60,11 +60,9 @@ export async function POST(
       back: c.back,
     }));
 
-    // Call Gemini to translate all cards at once
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-    const result = await model.generateContent(
+    // Call NVIDIA NIM to translate all cards at once
+    const responseText = await nimChat(
+      "You are a professional translator. Return ONLY valid JSON, no explanation, no markdown.",
       `Translate ALL of these flashcards to ${languageName} (${languageCode}).
 Keep technical/scientific terms in English where appropriate.
 Return ONLY valid JSON, no explanation, no markdown.
@@ -76,7 +74,6 @@ Return format:
 [{"cardId": "...", "translatedFront": "...", "translatedBack": "..."}]`
     );
 
-    const responseText = result.response.text();
     if (!responseText) {
       return NextResponse.json(
         { error: "No response from AI" },

@@ -1,7 +1,7 @@
 // FILE: app/api/exam-predictor/route.ts
 
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { nimChat } from "@/lib/nvidia-nim";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 
@@ -62,9 +62,6 @@ export async function POST(request: Request) {
 
     const { pdfTexts, subject, examName } = validation.data;
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
     const prompt = `You are an expert exam analyst. I am giving you ${pdfTexts.length} past year question papers for ${examName} (${subject}).
 
 Analyze ALL papers carefully and:
@@ -84,8 +81,10 @@ Return ONLY valid JSON in this exact format, no markdown, no explanation:
 Papers content:
 ${pdfTexts.map((t, i) => `--- Paper ${i + 1} ---\n${t.slice(0, 5000)}`).join("\n\n")}`;
 
-    const aiResult = await model.generateContent(prompt);
-    const responseText = aiResult.response.text();
+    const responseText = await nimChat(
+      "You are an expert exam analyst. Always return valid JSON.",
+      prompt
+    );
 
     if (!responseText) {
       return NextResponse.json(
