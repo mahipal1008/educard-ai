@@ -41,20 +41,25 @@ export async function POST(request: Request) {
 
     let body: Record<string, unknown> = {};
     try {
-      body = await request.json();
+      const cloned = request.clone();
+      body = await cloned.json();
     } catch {
       return NextResponse.json(
-        { error: "Invalid request body" },
+        { error: "Invalid request body. Send JSON with { url: 'https://youtube.com/watch?v=...' }" },
         { status: 400 }
       );
     }
 
-    const validation = youtubeUrlSchema.safeParse(body);
+    // Handle case where url might be nested or missing
+    const urlValue = body?.url ?? body?.youtubeUrl ?? body?.videoUrl;
+    const parseable = { ...body, url: urlValue };
+
+    const validation = youtubeUrlSchema.safeParse(parseable);
     const aiPrefs = body?.aiPrefs as Record<string, unknown> | undefined;
 
     if (!validation.success) {
       return NextResponse.json(
-        { error: validation.error.issues[0].message, receivedKeys: Object.keys(body || {}) },
+        { error: validation.error.issues[0].message, receivedKeys: Object.keys(body || {}), body: JSON.stringify(body).slice(0, 200) },
         { status: 400 }
       );
     }
